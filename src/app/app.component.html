@@ -1,538 +1,1288 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-<style>
-  :host {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-size: 14px;
-    color: #333;
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin: 8px 0;
-  }
-
-  p {
-    margin: 0;
-  }
-
-  .spacer {
-    flex: 1;
-  }
-
-  .toolbar {
-    height: 60px;
-    margin: -8px;
-    display: flex;
-    align-items: center;
-    background-color: #1976d2;
-    color: white;
-    font-weight: 600;
-  }
-
-  .toolbar img {
-    margin: 0 16px;
-  }
-
-  .toolbar #twitter-logo {
-    height: 40px;
-    margin: 0 16px;
-  }
-
-  .toolbar #twitter-logo:hover {
-    opacity: 0.8;
-  }
-
-  .content {
-    display: flex;
-    margin: 32px auto;
-    padding: 0 16px;
-    max-width: 960px;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  svg.material-icons {
-    height: 24px;
-    width: auto;
-  }
-
-  svg.material-icons:not(:last-child) {
-    margin-right: 8px;
-  }
-
-  .card svg.material-icons path {
-    fill: #888;
-  }
-
-  .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 16px;
-  }
-
-  .card {
-    border-radius: 4px;
-    border: 1px solid #eee;
-    background-color: #fafafa;
-    height: 40px;
-    width: 200px;
-    margin: 0 8px 16px;
-    padding: 16px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.2s ease-in-out;
-    line-height: 24px;
-  }
-
-  .card-container .card:not(:last-child) {
-    margin-right: 0;
-  }
-
-  .card.card-small {
-    height: 16px;
-    width: 168px;
-  }
-
-  .card-container .card:not(.highlight-card) {
-    cursor: pointer;
-  }
-
-  .card-container .card:not(.highlight-card):hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 17px rgba(black, 0.35);
-  }
-
-  .card-container .card:not(.highlight-card):hover .material-icons path {
-    fill: rgb(105, 103, 103);
-  }
-
-  .card.highlight-card {
-    background-color: #1976d2;
-    color: white;
-    font-weight: 600;
-    border: none;
-    width: auto;
-    min-width: 30%;
-    position: relative;
-  }
-
-  .card.card.highlight-card span {
-    margin-left: 60px;
-  }
-
-  svg#rocket {
-    width: 80px;
-    position: absolute;
-    left: -10px;
-    top: -24px;
-  }
-
-  svg#rocket-smoke {
-    height: 100vh;
-    position: absolute;
-    top: 10px;
-    right: 180px;
-    z-index: -10;
-  }
-
-  a,
-  a:visited,
-  a:hover {
-    color: #1976d2;
-    text-decoration: none;
-  }
-
-  a:hover {
-    color: #125699;
-  }
-
-  .terminal {
-    position: relative;
-    width: 80%;
-    max-width: 600px;
-    border-radius: 6px;
-    padding-top: 45px;
-    margin-top: 8px;
-    overflow: hidden;
-    background-color: rgb(15, 15, 16);
-  }
-
-  .terminal::before {
-    content: "\2022 \2022 \2022";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 4px;
-    background: rgb(58, 58, 58);
-    color: #c2c3c4;
-    width: 100%;
-    font-size: 2rem;
-    line-height: 0;
-    padding: 14px 0;
-    text-indent: 4px;
-  }
-
-  .terminal pre {
-    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
-    color: white;
-    padding: 0 1rem 1rem;
-    margin: 0;
-  }
-
-  .circle-link {
-    height: 40px;
-    width: 40px;
-    border-radius: 40px;
-    margin: 8px;
-    background-color: white;
-    border: 1px solid #eeeeee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    transition: 1s ease-out;
-  }
-
-  .circle-link:hover {
-    transform: translateY(-0.25rem);
-    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
-  }
-
-  footer {
-    margin-top: 8px;
-    display: flex;
-    align-items: center;
-    line-height: 20px;
-  }
-
-  footer a {
-    display: flex;
-    align-items: center;
-  }
-
-  .github-star-badge {
-    color: #24292e;
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    padding: 3px 10px;
-    border: 1px solid rgba(27,31,35,.2);
-    border-radius: 3px;
-    background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);
-    margin-left: 4px;
-    font-weight: 600;
-    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
-  }
-
-  .github-star-badge:hover {
-    background-image: linear-gradient(-180deg,#f0f3f6,#e6ebf1 90%);
-    border-color: rgba(27,31,35,.35);
-    background-position: -.5em;
-  }
-
-  .github-star-badge .material-icons {
-    height: 16px;
-    width: 16px;
-    margin-right: 4px;
-  }
-
-  svg#clouds {
-    position: fixed;
-    bottom: -160px;
-    left: -230px;
-    z-index: -10;
-    width: 1920px;
-  }
-
-
-  /* Responsive Styles */
-  @media screen and (max-width: 767px) {
-
-    .card-container > *:not(.circle-link) ,
-    .terminal {
-      width: 100%;
-    }
-
-    .card:not(.highlight-card) {
-      height: 16px;
-      margin: 8px 0;
-    }
-
-    .card.highlight-card span {
-      margin-left: 72px;
-    }
-
-    svg#rocket-smoke {
-      right: 120px;
-      transform: rotate(-5deg);
-    }
-  }
-
-  @media screen and (max-width: 575px) {
-    svg#rocket-smoke {
-      display: none;
-      visibility: hidden;
-    }
-  }
-</style>
-
-<!-- Toolbar -->
-<div class="toolbar" role="banner">
-  <img
-    width="40"
-    alt="Angular Logo"
-    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
-  />
-  <span>Welcome</span>
-    <div class="spacer"></div>
-  <a aria-label="Angular on twitter" target="_blank" rel="noopener" href="https://twitter.com/angular" title="Twitter">
-    
-    <svg id="twitter-logo" height="24" data-name="Logo — FIXED" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
-      <defs>
-        <style>
-          .cls-1 {
-            fill: none;
-          }
-
-          .cls-2 {
-            fill: #ffffff;
-          }
-        </style>
-      </defs>
-      <rect class="cls-1" width="400" height="400" />
-      <path class="cls-2" d="M153.62,301.59c94.34,0,145.94-78.16,145.94-145.94,0-2.22,0-4.43-.15-6.63A104.36,104.36,0,0,0,325,122.47a102.38,102.38,0,0,1-29.46,8.07,51.47,51.47,0,0,0,22.55-28.37,102.79,102.79,0,0,1-32.57,12.45,51.34,51.34,0,0,0-87.41,46.78A145.62,145.62,0,0,1,92.4,107.81a51.33,51.33,0,0,0,15.88,68.47A50.91,50.91,0,0,1,85,169.86c0,.21,0,.43,0,.65a51.31,51.31,0,0,0,41.15,50.28,51.21,51.21,0,0,1-23.16.88,51.35,51.35,0,0,0,47.92,35.62,102.92,102.92,0,0,1-63.7,22A104.41,104.41,0,0,1,75,278.55a145.21,145.21,0,0,0,78.62,23"
-      />
-    </svg>
-    
-  </a>
+<div class="_2nhb" data-reactid="6">
+  <div class="_3VzI" data-reactid="7"><span class="_3Qsk"><span class="_2egn"
+        style="background: rgb(231, 75, 36); color: rgb(255, 255, 255); font-weight: 600;">Paytm First
+        Games</span></span><span class="_3Qsk"><span class="_2egn"
+        style="color: rgb(51, 51, 51); font-weight: 600;">Play Games &amp; Win Up to Rs 5 Cr. Daily</span></span></div>
+  <div class="_1F92" data-reactid="8"><span class="_3Qsk"><span class="_2egn" style="font-weight: 400;">Accept
+        Payments</span></span><span class="_3Qsk"><span class="_2egn" style="font-weight: 400;">Food
+        Wallet</span></span><span class="_3Qsk"><span class="_2egn" style="font-weight: 400;">Track
+        Order</span></span><span class="_3Qsk"><span class="_2egn" style="font-weight: 400;">Sell on Paytm
+        Mall</span></span><span class="_3Qsk"><span class="_2egn" style="font-weight: 400;">Paytm Smart
+        Retail</span></span><span class="_3Qsk"><span class="_2egn" style="font-weight: 400;">KYC</span></span><span
+      class="_3Qsk"><span class="_2egn" style="color: rgb(51, 51, 51); font-weight: 400;">24x7 Help</span></span></div>
 </div>
-
-<div class="content" role="main">
-
-  <!-- Highlight Card -->
-  <div class="card highlight-card card-small">
-
-    <svg id="rocket" alt="Rocket Ship" xmlns="http://www.w3.org/2000/svg" width="101.678" height="101.678" viewBox="0 0 101.678 101.678">
-      <g id="Group_83" data-name="Group 83" transform="translate(-141 -696)">
-        <circle id="Ellipse_8" data-name="Ellipse 8" cx="50.839" cy="50.839" r="50.839" transform="translate(141 696)" fill="#dd0031"/>
-        <g id="Group_47" data-name="Group 47" transform="translate(165.185 720.185)">
-          <path id="Path_33" data-name="Path 33" d="M3.4,42.615a3.084,3.084,0,0,0,3.553,3.553,21.419,21.419,0,0,0,12.215-6.107L9.511,30.4A21.419,21.419,0,0,0,3.4,42.615Z" transform="translate(0.371 3.363)" fill="#fff"/>
-          <path id="Path_34" data-name="Path 34" d="M53.3,3.221A3.09,3.09,0,0,0,50.081,0,48.227,48.227,0,0,0,18.322,13.437c-6-1.666-14.991-1.221-18.322,7.218A33.892,33.892,0,0,1,9.439,25.1l-.333.666a3.013,3.013,0,0,0,.555,3.553L23.985,43.641a2.9,2.9,0,0,0,3.553.555l.666-.333A33.892,33.892,0,0,1,32.647,53.3c8.55-3.664,8.884-12.326,7.218-18.322A48.227,48.227,0,0,0,53.3,3.221ZM34.424,9.772a6.439,6.439,0,1,1,9.106,9.106,6.368,6.368,0,0,1-9.106,0A6.467,6.467,0,0,1,34.424,9.772Z" transform="translate(0 0.005)" fill="#fff"/>
-        </g>
-      </g>
-    </svg>
-
-    <span>{{ title }} app is running!</span>
-
-    <svg id="rocket-smoke" alt="Rocket Ship Smoke" xmlns="http://www.w3.org/2000/svg" width="516.119" height="1083.632" viewBox="0 0 516.119 1083.632">
-      <path id="Path_40" data-name="Path 40" d="M644.6,141S143.02,215.537,147.049,870.207s342.774,201.755,342.774,201.755S404.659,847.213,388.815,762.2c-27.116-145.51-11.551-384.124,271.9-609.1C671.15,139.365,644.6,141,644.6,141Z" transform="translate(-147.025 -140.939)" fill="#f5f5f5"/>
-    </svg>
-
-  </div>
-
-  <!-- Resources -->
-  <h2>Resources</h2>
-  <p>Here are some links to help you get started:</p>
-
-  <div class="card-container">
-    <a class="card" target="_blank" rel="noopener" href="https://angular.io/tutorial">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
-
-      <span>Learn Angular</span>
-
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>    </a>
-
-    <a class="card" target="_blank" rel="noopener" href="https://angular.io/cli">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
-
-      <span>CLI Documentation</span>
-
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-    </a>
-
-    <a class="card" target="_blank" rel="noopener" href="https://blog.angular.io/">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/></svg>
-
-      <span>Angular Blog</span>
-
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-    </a>
-
-  </div>
-
-  <!-- Next Steps -->
-  <h2>Next Steps</h2>
-  <p>What do you want to do next with your app?</p>
-
-  <input type="hidden" #selection>
-
-  <div class="card-container">
-    <div class="card card-small" (click)="selection.value = 'component'" tabindex="0">
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-
-      <span>New Component</span>
+<div class="_3AxU" data-reactid="9">
+  <div class="_22in" data-reactid="10"><i class="iconMenu cursor" data-reactid="11"></i></div><a href="/" class="_2ts1"
+    target="_self" data-reactid="12"><i class="iconPaytm" data-reactid="13"><span class="path1"
+        data-reactid="14"></span><span class="path2" data-reactid="15"></span><span class="path3"
+        data-reactid="16"></span><span class="path4" data-reactid="17"></span><span class="path5"
+        data-reactid="18"></span></i></a>
+  <div class="_3HxD" data-reactid="19"><span class="iconSearch _2Ysz" data-reactid="20"></span><input type="search"
+      autocomplete="off" placeholder="Search for a Product , Brand or Category" data-reactid="21"></div>
+  <div class="_3huM" data-reactid="22">
+    <div class="DVLS" data-reactid="23">
+      <div class="Jzou" data-reactid="24"><img src="//assetscdn1.paytm.com/dexter/c31b8a6c95d459485a993039d5b1714f.gif"
+          alt="MobileImg" class="_2iW5" data-reactid="25"><span class="_1Saj" data-reactid="26">Play and Win</span>
+      </div>
     </div>
-
-    <div class="card card-small" (click)="selection.value = 'material'" tabindex="0">
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-
-      <span>Angular Material</span>
-    </div>
-
-    <div class="card card-small" (click)="selection.value = 'dependency'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-
-      <span>Add Dependency</span>
-    </div>
-
-    <div class="card card-small" (click)="selection.value = 'test'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-
-      <span>Run and Watch Tests</span>
-    </div>
-
-    <div class="card card-small" (click)="selection.value = 'build'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-
-      <span>Build for Production</span>
-    </div>
-  </div>
-
-  <!-- Terminal -->
-  <div class="terminal" [ngSwitch]="selection.value">
-      <pre *ngSwitchDefault>ng generate component xyz</pre>
-      <pre *ngSwitchCase="'material'">ng add @angular/material</pre>
-      <pre *ngSwitchCase="'dependency'">ng add _____</pre>
-      <pre *ngSwitchCase="'test'">ng test</pre>
-      <pre *ngSwitchCase="'build'">ng build --prod</pre>
-  </div>
-
-  <!-- Links -->
-  <div class="card-container">
-    <a class="circle-link" title="Animations" href="https://angular.io/guide/animations" target="_blank" rel="noopener">
-      <svg id="Group_20" data-name="Group 20" xmlns="http://www.w3.org/2000/svg" width="21.813" height="23.453" viewBox="0 0 21.813 23.453">
-        <path id="Path_15" data-name="Path 15" d="M4099.584,972.736h0l-10.882,3.9,1.637,14.4,9.245,5.153,9.245-5.153,1.686-14.4Z" transform="translate(-4088.702 -972.736)" fill="#ffa726"/>
-        <path id="Path_16" data-name="Path 16" d="M4181.516,972.736v23.453l9.245-5.153,1.686-14.4Z" transform="translate(-4170.633 -972.736)" fill="#fb8c00"/>
-        <path id="Path_17" data-name="Path 17" d="M4137.529,1076.127l-7.7-3.723,4.417-2.721,7.753,3.723Z" transform="translate(-4125.003 -1058.315)" fill="#ffe0b2"/>
-        <path id="Path_18" data-name="Path 18" d="M4137.529,1051.705l-7.7-3.723,4.417-2.721,7.753,3.723Z" transform="translate(-4125.003 -1036.757)" fill="#fff3e0"/>
-        <path id="Path_19" data-name="Path 19" d="M4137.529,1027.283l-7.7-3.723,4.417-2.721,7.753,3.723Z" transform="translate(-4125.003 -1015.199)" fill="#fff"/>
-      </svg>
-    </a>
-
-    <a class="circle-link" title="CLI" href="https://cli.angular.io/" target="_blank" rel="noopener">
-      <svg alt="Angular CLI Logo" xmlns="http://www.w3.org/2000/svg" width="21.762" height="23.447" viewBox="0 0 21.762 23.447">
-        <g id="Group_21" data-name="Group 21" transform="translate(0)">
-          <path id="Path_20" data-name="Path 20" d="M2660.313,313.618h0l-10.833,3.9,1.637,14.4,9.2,5.152,9.244-5.152,1.685-14.4Z" transform="translate(-2649.48 -313.618)" fill="#37474f"/>
-          <path id="Path_21" data-name="Path 21" d="M2741.883,313.618v23.447l9.244-5.152,1.685-14.4Z" transform="translate(-2731.05 -313.618)" fill="#263238"/>
-          <path id="Path_22" data-name="Path 22" d="M2692.293,379.169h11.724V368.618h-11.724Zm11.159-.6h-10.608v-9.345h10.621v9.345Z" transform="translate(-2687.274 -362.17)" fill="#fff"/>
-          <path id="Path_23" data-name="Path 23" d="M2709.331,393.688l.4.416,2.265-2.28-2.294-2.294-.4.4,1.893,1.893Z" transform="translate(-2702.289 -380.631)" fill="#fff"/>
-          <rect id="Rectangle_12" data-name="Rectangle 12" width="3.517" height="0.469" transform="translate(9.709 13.744)" fill="#fff"/>
-        </g>
-      </svg>
-    </a>
-
-    <a class="circle-link" title="Augury" href="https://augury.rangle.io/" target="_blank" rel="noopener">
-      <svg alt="Angular Augury Logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="21.81" height="23.447" viewBox="0 0 21.81 23.447">
-        <defs>
-          <clipPath id="clip-path">
-            <rect id="Rectangle_13" data-name="Rectangle 13" width="10.338" height="10.27" fill="none"/>
-          </clipPath>
-        </defs>
-        <g id="Group_25" data-name="Group 25" transform="translate(0)">
-          <path id="Path_24" data-name="Path 24" d="M3780.155,311.417h0l-10.881,3.9,1.637,14.4,9.244,5.152,9.244-5.152,1.685-14.4Z" transform="translate(-3769.274 -311.417)" fill="#4a3493"/>
-          <path id="Path_25" data-name="Path 25" d="M3862.088,311.417v23.447l9.244-5.152,1.685-14.4Z" transform="translate(-3851.207 -311.417)" fill="#311b92"/>
-          <g id="Group_24" data-name="Group 24" transform="translate(6.194 6.73)" opacity="0.5">
-            <g id="Group_23" data-name="Group 23" transform="translate(0 0)">
-              <g id="Group_22" data-name="Group 22" clip-path="url(#clip-path)">
-                <path id="Path_26" data-name="Path 26" d="M3832.4,373.252a5.168,5.168,0,1,1-5.828-4.383,5.216,5.216,0,0,1,2.574.3,3.017,3.017,0,1,0,3.252,4.086Z" transform="translate(-3822.107 -368.821)" fill="#fff"/>
-              </g>
-            </g>
-          </g>
-          <path id="Path_27" data-name="Path 27" d="M3830.582,370.848a5.162,5.162,0,1,1-3.254-4.086,3.017,3.017,0,1,0,3.252,4.086Z" transform="translate(-3814.311 -359.969)" fill="#fff"/>
-        </g>
-      </svg>
-    </a>
-
-    <a class="circle-link" title="Protractor" href="https://www.protractortest.org/" target="_blank" rel="noopener">
-      <svg alt="Angular Protractor Logo" xmlns="http://www.w3.org/2000/svg" width="21.81" height="23.447" viewBox="0 0 21.81 23.447">
-        <g id="Group_26" data-name="Group 26" transform="translate(0)">
-          <path id="Path_28" data-name="Path 28" d="M4620.155,311.417h0l-10.881,3.9,1.637,14.4,9.244,5.152,9.244-5.152,1.685-14.4Z" transform="translate(-4609.274 -311.417)" fill="#e13439"/>
-          <path id="Path_29" data-name="Path 29" d="M4702.088,311.417v23.447l9.244-5.152,1.685-14.4Z" transform="translate(-4691.207 -311.417)" fill="#b52f32"/>
-          <path id="Path_30" data-name="Path 30" d="M4651.044,369.58v-.421h1.483a7.6,7.6,0,0,0-2.106-5.052l-1.123,1.123-.3-.3,1.122-1.121a7.588,7.588,0,0,0-4.946-2.055v1.482h-.421v-1.485a7.589,7.589,0,0,0-5.051,2.058l1.122,1.121-.3.3-1.123-1.123a7.591,7.591,0,0,0-2.106,5.052h1.482v.421h-1.489v1.734h15.241V369.58Zm-10.966-.263a4.835,4.835,0,0,1,9.67,0Z" transform="translate(-4634.008 -355.852)" fill="#fff"/>
-        </g>
-      </svg>
-    </a>
-
-    <a class="circle-link" title="Find a Local Meetup" href="https://www.meetup.com/find/?keywords=angular" target="_blank" rel="noopener">
-      <svg alt="Meetup Logo" xmlns="http://www.w3.org/2000/svg" width="24.607" height="23.447" viewBox="0 0 24.607 23.447">
-        <path id="logo--mSwarm" d="M21.221,14.95A4.393,4.393,0,0,1,17.6,19.281a4.452,4.452,0,0,1-.8.069c-.09,0-.125.035-.154.117a2.939,2.939,0,0,1-2.506,2.091,2.868,2.868,0,0,1-2.248-.624.168.168,0,0,0-.245-.005,3.926,3.926,0,0,1-2.589.741,4.015,4.015,0,0,1-3.7-3.347,2.7,2.7,0,0,1-.043-.38c0-.106-.042-.146-.143-.166a3.524,3.524,0,0,1-1.516-.69A3.623,3.623,0,0,1,2.23,14.557a3.66,3.66,0,0,1,1.077-3.085.138.138,0,0,0,.026-.2,3.348,3.348,0,0,1-.451-1.821,3.46,3.46,0,0,1,2.749-3.28.44.44,0,0,0,.355-.281,5.072,5.072,0,0,1,3.863-3,5.028,5.028,0,0,1,3.555.666.31.31,0,0,0,.271.03A4.5,4.5,0,0,1,18.3,4.7a4.4,4.4,0,0,1,1.334,2.751,3.658,3.658,0,0,1,.022.706.131.131,0,0,0,.1.157,2.432,2.432,0,0,1,1.574,1.645,2.464,2.464,0,0,1-.7,2.616c-.065.064-.051.1-.014.166A4.321,4.321,0,0,1,21.221,14.95ZM13.4,14.607a2.09,2.09,0,0,0,1.409,1.982,4.7,4.7,0,0,0,1.275.221,1.807,1.807,0,0,0,.9-.151.542.542,0,0,0,.321-.545.558.558,0,0,0-.359-.534,1.2,1.2,0,0,0-.254-.078c-.262-.047-.526-.086-.787-.138a.674.674,0,0,1-.617-.75,3.394,3.394,0,0,1,.218-1.109c.217-.658.509-1.286.79-1.918a15.609,15.609,0,0,0,.745-1.86,1.95,1.95,0,0,0,.06-1.073,1.286,1.286,0,0,0-1.051-1.033,1.977,1.977,0,0,0-1.521.2.339.339,0,0,1-.446-.042c-.1-.092-.2-.189-.307-.284a1.214,1.214,0,0,0-1.643-.061,7.563,7.563,0,0,1-.614.512A.588.588,0,0,1,10.883,8c-.215-.115-.437-.215-.659-.316a2.153,2.153,0,0,0-.695-.248A2.091,2.091,0,0,0,7.541,8.562a9.915,9.915,0,0,0-.405.986c-.559,1.545-1.015,3.123-1.487,4.7a1.528,1.528,0,0,0,.634,1.777,1.755,1.755,0,0,0,1.5.211,1.35,1.35,0,0,0,.824-.858c.543-1.281,1.032-2.584,1.55-3.875.142-.355.28-.712.432-1.064a.548.548,0,0,1,.851-.24.622.622,0,0,1,.185.539,2.161,2.161,0,0,1-.181.621c-.337.852-.68,1.7-1.018,2.552a2.564,2.564,0,0,0-.173.528.624.624,0,0,0,.333.71,1.073,1.073,0,0,0,.814.034,1.22,1.22,0,0,0,.657-.655q.758-1.488,1.511-2.978.35-.687.709-1.37a1.073,1.073,0,0,1,.357-.434.43.43,0,0,1,.463-.016.373.373,0,0,1,.153.387.7.7,0,0,1-.057.236c-.065.157-.127.316-.2.469-.42.883-.846,1.763-1.262,2.648A2.463,2.463,0,0,0,13.4,14.607Zm5.888,6.508a1.09,1.09,0,0,0-2.179.006,1.09,1.09,0,0,0,2.179-.006ZM1.028,12.139a1.038,1.038,0,1,0,.01-2.075,1.038,1.038,0,0,0-.01,2.075ZM13.782.528a1.027,1.027,0,1,0-.011,2.055A1.027,1.027,0,0,0,13.782.528ZM22.21,6.95a.882.882,0,0,0-1.763.011A.882.882,0,0,0,22.21,6.95ZM4.153,4.439a.785.785,0,1,0,.787-.78A.766.766,0,0,0,4.153,4.439Zm8.221,18.22a.676.676,0,1,0-.677.666A.671.671,0,0,0,12.374,22.658ZM22.872,12.2a.674.674,0,0,0-.665.665.656.656,0,0,0,.655.643.634.634,0,0,0,.655-.644A.654.654,0,0,0,22.872,12.2ZM7.171-.123A.546.546,0,0,0,6.613.43a.553.553,0,1,0,1.106,0A.539.539,0,0,0,7.171-.123ZM24.119,9.234a.507.507,0,0,0-.493.488.494.494,0,0,0,.494.494.48.48,0,0,0,.487-.483A.491.491,0,0,0,24.119,9.234Zm-19.454,9.7a.5.5,0,0,0-.488-.488.491.491,0,0,0-.487.5.483.483,0,0,0,.491.479A.49.49,0,0,0,4.665,18.936Z" transform="translate(0 0.123)" fill="#f64060"/>
-      </svg>
-    </a>
-
-    <a class="circle-link" title="Join the Conversation on Gitter" href="https://gitter.im/angular/angular" target="_blank" rel="noopener">
-      <svg alt="Gitter Logo" xmlns="http://www.w3.org/2000/svg" width="19.447" height="19.447" viewBox="0 0 19.447 19.447">
-        <g id="Group_40" data-name="Group 40" transform="translate(-1612 -405)">
-          <rect id="Rectangle_19" data-name="Rectangle 19" width="19.447" height="19.447" transform="translate(1612 405)" fill="#e60257"/>
-          <g id="gitter" transform="translate(1617.795 408.636)">
-            <g id="Group_33" data-name="Group 33" transform="translate(0 0)">
-              <rect id="Rectangle_15" data-name="Rectangle 15" width="1.04" height="9.601" transform="translate(2.304 2.324)" fill="#fff"/>
-              <rect id="Rectangle_16" data-name="Rectangle 16" width="1.04" height="9.601" transform="translate(4.607 2.324)" fill="#fff"/>
-              <rect id="Rectangle_17" data-name="Rectangle 17" width="1.04" height="4.648" transform="translate(6.91 2.324)" fill="#fff"/>
-              <rect id="Rectangle_18" data-name="Rectangle 18" width="1.04" height="6.971" transform="translate(0 0)" fill="#fff"/>
-            </g>
-          </g>
-        </g>
-      </svg>
-    </a>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-      Love Angular?&nbsp;
-      <a href="https://github.com/angular/angular" target="_blank" rel="noopener"> Give our repo a star.
-        <div class="github-star-badge">
-            <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-          Star
+    <div class="_2_g6" data-reactid="27"><img
+        src="//assetscdn1.paytm.com/dexter/addMoney-b9bccc4e235b082ef9d75a4da93faa70.svg" alt="Add Money" width="20px"
+        data-reactid="28"><span data-reactid="29">Add Money</span></div>
+    <div class="fklM" data-reactid="30">
+      <div class="_3OIx" data-reactid="31"><span class="iconWallet _1gG6" data-reactid="32"><span class="path1"
+            data-reactid="33"></span><span class="path2" data-reactid="34"></span></span>
+        <div class="_20nV" data-reactid="35">
+          <div class="_3fM-" data-reactid="36">
+            <!-- react-text: 37 -->Paytm
+            <!-- /react-text -->
+            <!-- react-text: 38 -->Wallet
+            <!-- /react-text -->
+          </div>
         </div>
-      </a>
-      <a href="https://github.com/angular/angular" target="_blank" rel="noopener">
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill="#1976d2"/><path d="M0 0h24v24H0z" fill="none"/></svg>
-      </a>
-  </footer>
-
-  <svg id="clouds" alt="Gray Clouds Background" xmlns="http://www.w3.org/2000/svg" width="2611.084" height="485.677" viewBox="0 0 2611.084 485.677">
-    <path id="Path_39" data-name="Path 39" d="M2379.709,863.793c10-93-77-171-168-149-52-114-225-105-264,15-75,3-140,59-152,133-30,2.83-66.725,9.829-93.5,26.25-26.771-16.421-63.5-23.42-93.5-26.25-12-74-77-130-152-133-39-120-212-129-264-15-54.084-13.075-106.753,9.173-138.488,48.9-31.734-39.726-84.4-61.974-138.487-48.9-52-114-225-105-264,15a162.027,162.027,0,0,0-103.147,43.044c-30.633-45.365-87.1-72.091-145.206-58.044-52-114-225-105-264,15-75,3-140,59-152,133-53,5-127,23-130,83-2,42,35,72,70,86,49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33,61.112,8.015,113.854-5.72,150.492-29.764a165.62,165.62,0,0,0,110.861-3.236c47,94,178,113,251,33,31.385,4.116,60.563,2.495,86.487-3.311,25.924,5.806,55.1,7.427,86.488,3.311,73,80,204,61,251-33a165.625,165.625,0,0,0,120,0c51,13,108,15,157-5a147.188,147.188,0,0,0,33.5-18.694,147.217,147.217,0,0,0,33.5,18.694c49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33C2446.709,1093.793,2554.709,922.793,2379.709,863.793Z" transform="translate(142.69 -634.312)" fill="#eee"/>
-  </svg>
-
+      </div><!-- react-empty: 2524 -->
+    </div>
+    <div class="_1Vt1" data-reactid="40"><span class="_3B8E" data-reactid="41"><i class="iconProfile"
+          data-reactid="42"><span class="path1" data-reactid="43"></span><span class="path2"
+            data-reactid="44"></span><span class="path3" data-reactid="45"></span></i></span>
+      <div class="_3ac-" data-reactid="46">Log In/Sign Up</div>
+    </div>
+  </div>
 </div>
+<div class="_3ejW" data-reactid="59">
+  <div class="_2kcr" data-reactid="60"><a (click)="mobileRecharge()" class="_3CX4" title="Mobile Prepaid" target="_top"
+      data-reactid="61">
+      <div class="_1rUn SaN4" data-reactid="62"><img class="_3thc"
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAAA4CAYAAABez76GAAAAAXNSR0IArs4c6QAAAzlJREFUaAXtm0trFEEQx2cSjTE+Ynwhvg65KREk+MCDkIOiFxXBm4ge9CQoCN6ieBHxpn4DwU/gTSPkJL6QgKIielEjehAUo4muuu2vZCb0LpupHe3ZHaEK/unqru6qmv/WTm+gO44KEOfcIG7PgM1gFXB1oNvUmKwTyVr/Dvt9cCGO45cyudQCOYdBBbRaJgi4OzQ5cUiHJLgWf0/A/JB+c/gaZ+46KulLjjWZUzsyrfmNR1mSkjOG3k+y8iFInE4wC8xO0EU7B3SDuQl6aOcB8bEALEzQS7sI9IHFCZbQLgVbwWsgshrs/6OV8Q8VdN37Xh1pVY7EPO/FvRgyrnyiIWWl5+yxp2eqPNwBJmysm/SB/mUKMH1R15lrus+8nmwKwSQ0QX+b2GkWbqlb/Jn+VfCxbrxRtxkSG61Tx8pC0DYylXeRLxWq56c/0A69FARBRJWHn2wHAVrM0LuYFu+/sxtBykdmBBlBCgOK2SrICFIYUMxWQUaQwoBitgoyghQGFLNVkBGkMKCYrYKMIIUBxWwVZAQpDChmqyAjSGFAMVsFGUEKA4rZKsgIUhhQzFZBRpDCgGK2CjKCFAYUs1WQEaQwoJitgowghQHFbBVkBCkMKOYiD1D1cfZwWUZ87QhyHrucgC1EiiRopJCMW+zU3kEK4UVW0Cdi/1Dia6dTm7XLQXQ5bB5ciiRoB4czHwbPuIFD3nUHGb7WwPTPQ0USlD+5kakhLvZsYOGDaGfP3fwOwq8ozzvo5uSlqFodjaruCrgT3ZgaDv+4+T2Wg6Bb3/oj507Wpu/ORaOusO27NtbMvXIQ5Jx/xyPJ1nE7qLJi5tRbYykHQdXuMR73fe0jc3twqOtF7Vjre6EJGvceYb2nZ6u74q9RHO1hErte/D2K49tRR+de2l/ZC6etfiy5ohlMQu9ij8hsX5LdCbZf2eYl4fT3jLQpZFqqS/sUbPfGsDq5dJfOQZ3WZQz+YkK4AdRD0k9Ecggm2v87uQKR7BoWyN0tuTXYDnlLULmSOREqeNCvGIm9IbHjoBIqwRx+5LbQsZDkSOygFZQ+DJU0iH4KbALLgcRJY6V6qP4rfN8DZyHnOW1Q+Q2TZjaJCCu8RQAAAABJRU5ErkJggg=="
+          alt="Mobile Prepaid" data-reactid="63"><span class="_160X" data-reactid="64">Mobile Prepaid</span>
+        <div class="aMNW" data-reactid="65"></div>
+      </div>
+    </a><a href="https://paytm.com/mobile-bill-payment" class="_3CX4" title="Mobile Postpaid" target="_top"
+      data-reactid="66">
+      <div class="_1rUn " data-reactid="67"><img class="_3thc"
+          src="https://assetscdn1.paytm.com/images/catalog/view_item/431162/1562240946859.png" alt="Mobile Postpaid"
+          data-reactid="68"><span class="_160X" data-reactid="69">Mobile Postpaid</span>
+        <div class="aMNW" data-reactid="70"></div>
+      </div>
+    </a><a (click)="electicity()" class="_3CX4" title="Electricity" target="_top" data-reactid="71">
+      <div class="_1rUn " data-reactid="72"><img class="_3thc"
+          src="data:image/png;base64,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"
+          alt="Electricity" data-reactid="73"><span class="_160X" data-reactid="74">Electricity</span>
+        <div class="aMNW" data-reactid="75"></div>
+      </div>
+    </a><a href="https://paytm.com/dth-recharge" class="_3CX4" title="DTH Recharge" target="_top" data-reactid="76">
+      <div class="_1rUn " data-reactid="77"><img class="_3thc"
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAAA4CAYAAABez76GAAAAAXNSR0IArs4c6QAABFZJREFUaAXtW0lok0EUfpOmNqnLwYNURUFBcF+rIIrg0hQKBcENe1ERBaHgQbDqQTyKG6iHHhQ3EAW96EGwcakLiCjutqAiXhRRUbE26ZJ2/Cb5O04x6YzNJP1TZuB13ps38+Z7X9/k/0umjGy0m7GxlOCPiLEm4uEaqmRfbIT1Q4yAFRCdtAhxRhPny4nFTluJ6ZMgdggKBp6hengyJ05VFI3V+iS/rGHYIWhF6A2QHJFoOB2kW+3TpF3ACrOG/TUfQh9jD4nTbC/mC5pYuoAmsXajPaLx8cS76wlnlIrD62kpSxity/EkOxUkQE5jHcSCNThqcQ/zTHof32+E/zYP4vPrMsitQr+aOuKrjdblYZI9ggTYipJmYnyHxM1oO0XbKqWdSUm01YGY+Sk3Ki4YeJRpar7H7R0xFXlD7CoSrvaGPtOQ0hk4Mt/UKVK/0T6TurpACI6oaIzVUaT0gPQPsGK3gnqSCYU3Q/3smWXUGT/V4+rVP+bF1JU4J8kh9oAqwod6zRlgIzcELWFfKVC08e+jH9UUbd32T64/YnsxNis1jg9nFtiANd3/zBvAgdwQJBKqCF3Hz2MyN84OU7R9irQbWsuJs13SJtpNkdBbxfaFmjuCRHoTwnXE6GUyU87D1J04KrPmdBKfU8GkzVgjRcLHpc9HSm4JEu9APPnob0vlzCYme84ZiBub1Bn7TcVskzyOPiJHQMktQWKHypJXqJTFeDztJOpaKYaSZPDAOijnoVfT0vCH5LgPf/TrMc85L0IukyEjfJhTOkjibb6JMeZVcropFsZATBnkEqQVUmitE4DvQbynphkhxhWEwNMR8g5kpFlo387qBLIaVNNlE4RGBIGcYgR7CJnjBRXvKs2QX57t964EAKdCQh7QH+ing6RPnp1dB4IikJ72E8rc7CLmfzUwj4G87EkC/R4TFKZPsXIlWD2Yf6LYBaF61bJPAev9cayMpFFNCRqvrP2g6IWmqtjHmYA3Jcgk1qCc4wjS/FodQY4gDQMat6sgR5CGAY3bVZAjSMOAxu0qyBGkYUDjdhXkCNIwoHG7CnIEaRjQuF0FOYI0DGjcroIcQRoGNG5XQY4gDQMat6sgR5CGAY3bVZAjSMOAxm1aQa1KnGGKXmjqUAWwmpMy3Fs1JUj9qnkVvtc2Xdd7t4G31ioQnip6RjV1RzCjWzoaocUgpZCFEHHP5gJ63e2O1D+4YGKaJq6hNOA78+9pfHII+4yCsRwibpj0t4k72BHIGiXANUXPXgXQWojt9lyHDBu+s70p4p3V7fvffgRlkO0Qm7fLvvUFBHsFIS0QW60bgY5BxEkwakYXqNRICC5ueoiSF3eEdHcU+4rfgfVncMTuo8/YsN8yOGsg2RwxcUfxBeQu9hO9a46BPDHQ1xGQEFDm82BcgaQuf0tPwSotQL4Vx+2iLgPT95n1CDRYyBGcDIdsEYqumRIk3nns3AjVIcqPX1TQCZOt/gA1DRytq1fjwAAAAABJRU5ErkJggg=="
+          alt="DTH Recharge" data-reactid="78"><span class="_160X" data-reactid="79">DTH Recharge</span>
+        <div class="aMNW" data-reactid="80"></div>
+      </div>
+    </a><a href="https://paytm.com/metro-card-recharge" class="_3CX4" title="Metro" target="_top" data-reactid="81">
+      <div class="_1rUn " data-reactid="82"><img class="_3thc"
+          src="data:image/png;base64,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"
+          alt="Metro" data-reactid="83"><span class="_160X" data-reactid="84">Metro</span>
+        <div class="aMNW" data-reactid="85"></div>
+      </div>
+    </a><a href="https://paytm.com/landline-bill-payment" class="_3CX4" title="Landline" target="_top"
+      data-reactid="86">
+      <div class="_1rUn " data-reactid="87"><img class="_3thc"
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAAA4CAYAAABez76GAAAAAXNSR0IArs4c6QAABQ9JREFUaAXtm1+IV0UUx2dWZffHaop/KNGypEAhIYt6asX+/YoeKkJDhKhICLWwh+qhoF4LekmqhyDpoZeMQlqCttWHIgzMlsjspVpriTRytdxwN/fP7XN+3Pkxvx9dZ+bu/S137B74/ubMzDlnzjm/mft3rlIVVRkoVQaSJOkCD4ND4AzIojE6joLnQG+pguiUMwS6HHwOQulnFDZ0yq9S2CXABeBwaGYs+VPwq0oRTCecILinrGCn4F8CK7PGom8xeBScBYbezZKPvp0Ij5koKZ/xDQjZTZbeBfgFvrpzIafzDkIgK9B9EHwBvgczQOgfsERrPdGoefxg6whiN6eil1NeB3aCnrQtb/Enij+AfvwRHztPBLMIvAHOA6HfgSwXQyOhXqD4vlGmXA1OWPWi2AMYWh3qW1eIAgMsRf4Q2AVqqe4iSntZJGl7SGHryKz+KUTZU/Z+5L4ihus95Rti80OEke0HZimI6mfgaTAqlQLpPmzdBma7xK7BRh8Qe0JXgH6StJElJ8uvOMLoFmBoEma7sQ6vTQflL6bdt0Rnv6V/pa+erxy27wHnrDFe9tX1lsP4EWuAF21F2kudIPEVH3dY/p+Gn2fHMCtejIGJdAC5xpHjTpOolz5B4ix+jqYxSLGxGcBFGN+D9FpsdKd2hlm/YxexWeauIcs5rzOab4Iuswyfs/jY2LOWw14nAN8EWXb/X2yVIMf/XSWoSpAjA47uagY5EhR6q+Ew16HuAR7J6omtSrdefzlHm1EnVb32odLaPGlwqrQLxJEgNf4WV3nblX1L2x5JVv3g+LN0vZrV7WqPZIkl9nWYK6a2/mRxW0NQNY4ZpNUTRPWkUrrlFscdqT6pZnpec8tlS8SRoHrvb4TwfHYYneuJI0ED57dxgH5dJYEzSHOQVskWVe89mjeFcSRIs7wStYxgw+JM1BrOYI+glDtBcRyktd5HoN4vAZpZ1Dzp1Pq9Zj0HE8cMuqu2j9P8O+rHlmff7nCvVRdIUOC0azUbR4J4368GJ/pUV+AxaHiaY5D6ujXksFocCRoc38sM2q2mw4JrSA+M71B3197OodlQieMYpNS6vAFy9lufWxfFOGbQ/Hl71NT0C8yiwAtFTvM9tVcu/QTd3n2cIJuvmWYTcKhuLEssNK7C5KsEOVJZJahKkCMDju5qBlUJcmTA0V3NoCpBjgw4un1nkL1ZIfRq1uHCnHYvsUbzenzim6BhDE+mxteydWShNVBM7I2Ws79afCbrlSC2u0xh4VhqRe7f9mRaLGkHf+rjuMZTyQaN8vttyhdTMMA2YEi24D1kLMOXegMV/tXBX8CQ9w2sNkG6SizLbPsS3GLJDsI/BuStg3l7OcKMW2PJOFls70doayp4FeVpsBl47eFBLouupmMTeMASkD2UNxS+iVMGIJBl4Btgk3yxY88ge5OS5Vc2i/4nlsGV8J9a9SJZ+R5kQ7YnBfQwwFKwF5g9iwfELPU/gKHNvkOhsAL8bRQpF4ITVr0o9iMMBe+g9V5i7QEzmOzxkz3Tg0xXCfBN+J2p3AjlvbTLc5xMQmc5nR8AWQZCQ+jcRPut8LtBtzTOgmQvtPkU4bs8dnInqH0wglpFmzhhrjXkCfJhIA/O/+vNgrwz7wPmYzqRqZOgg5SXJpGkO8AYCKUZFKK7dMj1LxLoOvAxmAY+NITQnbkGmwOlwpZYu68ELTvZ5SOXrItRWVKTLCm5CK0o1gz8C5JF3jOsG1ZHAAAAAElFTkSuQmCC"
+          alt="Landline" data-reactid="88"><span class="_160X" data-reactid="89">Landline</span>
+        <div class="aMNW" data-reactid="90"></div>
+      </div>
+    </a><a (click)="broadband()" class="_3CX4" title="Broadband" target="_top" data-reactid="91">
+      <div class="_1rUn " data-reactid="92"><img class="_3thc"
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAAA4CAMAAABpEU60AAACDVBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AvP8AvPcAufYAv/8Axv8AuvYAuvcAv/8A//8AvPgAu/cAvfgAufUAuvUAufYAuvUAv/8AuvUAufYAu/YAzP8AufUAufYAuvcAufYAuvUAuvYAufUAuvYAufUAuvYAuvYAufYAuvYAvPkAufUAuvcAu/YAuvYAuf8Av/kAufUAuvUAv/8AuvUAufUAvfoA//8AuvYAzP8AvPgAvPgAuvcAuvUAv/8AvfYAu/YAvP////////////////////////////////////////8AufU2wiN3AAAArXRSTlMADzxcdICEfGxQKwQFWcP+8ZouTtqmHQyh+79/VD43RGSV3fBYGNDuFjqsgxXbnxI7jAPIYDlXZkgoArMf/E9Dq/rgtw39ZaPvB7QGGtiqmegBySpS2Wv5NGJJzHcQnAudmxGk9sV7uI/rE1tUCAlRXBQDRGEjM+zfGhjW8jgFt/xgwpuRzPTuyL35jCq7l4pZCyjn0xDO6jICqgpMRUNODDZTF0Ej9ST01Hottsp0ChMAAAABb3JOVAHPoneaAAACY0lEQVRIx+2X11cTQRTGUdSoiWCICirGAIJiAewmJgopKKJIUFk1YoNQFLFQVFQQQbGDBRV7oShw52/03o0JcGb15K554CHfQ8433577y5TdOTMJCVFr1uzEOXPnGeYvWGiMvkiSaVFSMoS12Jyil2NZAtOUvHSZHkxqGhUvX7EyfZV1tS0jk1pZa/ic7BwsXGtYFwly1xNqA5ezcRNW5eVPywoo28zjbNmKo9qm2vztO3busjvU0e5GUiIL5ARw7SGzt7BInWi3IRtbRhyehwXyZvmKqQv7JtdsfzoGJQdcNt7YjKX4c/AQEXLKDnvKITw9fu5s099XYHXaEZV79Bj6Sh0QUgaAEnlxUgtx+o/rA2EniidbpUkAJ/SBTgZOTW1Wnc77nw93ZupMjDhn4VxsQC4oignHj69iHBQHxUEzCOS05v5TBQgKe6vzrxibG1hy2zQx5z08DMlTpQGqxgc1gWDUCtRgQbXMsQD4ak2cmTfV+gAsUlwHUM9dxHqAOilsALBzQXaABinEM6uDC3LgqVQKdb2zWkWR7MLFxksh13T5ytWQu9bc0soFtV0X4sZNcu23hLh9h1xHpxB3u5igewLVTa6H3H1yXeQeNPFAvVT0kNwjco/JPSEnnvJAz6jmObm+CLKfXO8LHujlKyFet5MbeCPE23fkBt9j1xq5q/bh46eOkBv8/OXrn6ffvv/grhpLWkUKgJfL8eJZVwrx7jTEBQ0BZEqhGSDI/NgcQQCzlA6P4J4wyuGM4s7zc1jOK2nvLP8VtdQ7idZNwj+mcLdsZUz7XjM+wUIpE+NTin8DYm3KHxBv8pcAAAAASUVORK5CYII="
+          alt="Broadband" data-reactid="93"><span class="_160X" data-reactid="94">Broadband</span>
+        <div class="aMNW" data-reactid="95"></div>
+      </div>
+    </a><a href="https://paytmmall.com/paytm-fastag-MISPAYTM-FASTAGONE-6707493A5E3B71-pdp?src=store&amp;from=storefront"
+      class="_3CX4" title="Buy FASTag" target="_top" data-reactid="96">
+      <div class="_1rUn " data-reactid="97"><img class="_3thc"
+          src="https://assetscdn1.paytm.com/images/catalog/view_item/315135/1576644959956.png" alt="Buy FASTag"
+          data-reactid="98"><span class="_160X" data-reactid="99">Buy FASTag</span>
+        <div class="aMNW" data-reactid="100"></div>
+      </div>
+    </a><a href="https://paytm.com/education/explore/exam/777/management-aptitude-test" class="_3CX4"
+      title="AIMA MAT Form" target="_top" data-reactid="101">
+      <div class="_1rUn " data-reactid="102"><img class="_3thc"
+          src="https://assetscdn1.paytm.com/images/catalog/view_item/481409/1578315411198.png" alt="AIMA MAT Form"
+          data-reactid="103"><span class="_160X" data-reactid="104">AIMA MAT Form</span>
+        <div class="aMNW" data-reactid="105"></div>
+      </div>
+    </a><a
+      href="https://paytm.com/firstgames/?utm_source=paytm_web&amp;utm_medium=smart_icon&amp;utm_campaign=app_download"
+      class="_3CX4" title="Paytm First Games" target="_top" data-reactid="106">
+      <div class="_1rUn " data-reactid="107"><img class="_3thc"
+          src="https://assetscdn1.paytm.com/images/catalog/view_item/423273/1572325086416.png" alt="Paytm First Games"
+          data-reactid="108"><span class="_160X" data-reactid="109">Paytm First Games</span>
+        <div class="aMNW" data-reactid="110"></div>
+      </div>
+    </a><a href="https://paytmmoney.com?utm_source=Paytm&amp;utm_medium=Web_Banner_Icon&amp;utm_campaign=PaytmMoney"
+      class="_3CX4" title="Paytm Money" target="_top" data-reactid="111">
+      <div class="_1rUn " data-reactid="112"><img class="_3thc"
+          src="https://assetscdn1.paytm.com/images/catalog/view_item/464347/1570100072978.png" alt="Paytm Money"
+          data-reactid="113"><span class="_160X" data-reactid="114">Paytm Money</span>
+        <div class="aMNW" data-reactid="115"></div>
+      </div>
+    </a>
+    <div class="_3CX4" data-reactid="116">
+      <div class="_1rUn" data-reactid="117">
+        <div class="_3PqY" data-reactid="118">
+          <div class="_1sbU nvYt" data-reactid="119"><a href="https://paytm.com/digitalgold" class="_3t0b" title="Gold"
+              target="_top" data-reactid="120"><img class="_10lp"
+                src="https://assetscdn1.paytm.com/images/catalog/view_item/475276/1572416974740.png" alt="Gold"
+                data-reactid="121"><span class="_3-JW" data-reactid="122">Gold</span></a><a
+              href="https://paytm.com/cylinder-gas-recharge" class="_3t0b" title="Book a Cylinder" target="_top"
+              data-reactid="123"><img class="_10lp"
+                src="https://assetscdn1.paytm.com/images/catalog/view_item/244549/1570100136780.png"
+                alt="Book a Cylinder" data-reactid="124"><span class="_3-JW" data-reactid="125">Book a
+                Cylinder</span></a><a href="https://paytm.com/gas-bill-payment" class="_3t0b" title="Piped Gas Bill"
+              target="_top" data-reactid="126"><img class="_10lp"
+                src="data:image/png;base64,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"
+                alt="Piped Gas Bill" data-reactid="127"><span class="_3-JW" data-reactid="128">Piped Gas
+                Bill</span></a><a href="https://paytm.com/datacard-recharge" class="_3t0b" title="Data Card"
+              target="_top" data-reactid="129"><img class="_10lp"
+                src="https://assetscdn1.paytm.com/images/catalog/view_item/220348/1560922890227.png" alt="Data Card"
+                data-reactid="130"><span class="_3-JW" data-reactid="131">Data Card</span></a><a
+              href="https://paytm.com/challan-bill-payment" class="_3t0b" title="Challan" target="_top"
+              data-reactid="132"><img class="_10lp"
+                src="data:image/png;base64,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"
+                alt="Challan" data-reactid="133"><span class="_3-JW" data-reactid="134">Challan</span></a><a
+              href="https://paytm.com/loan-emi-payment" class="_3t0b" title="Loan" target="_top" data-reactid="135"><img
+                class="_10lp"
+                src="data:image/png;base64,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"
+                alt="Loan" data-reactid="136"><span class="_3-JW" data-reactid="137">Loan</span></a><a
+              href="https://paytm.com/cabletv" class="_3t0b" title="CableTv" target="_top" data-reactid="138"><img
+                class="_10lp"
+                src="data:image/png;base64,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"
+                alt="CableTv" data-reactid="139"><span class="_3-JW" data-reactid="140">CableTv</span></a><a
+              href="https://paytm.com/water-bill-payment" class="_3t0b" title="Water" target="_top"
+              data-reactid="141"><img class="_10lp"
+                src="data:image/png;base64,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"
+                alt="Water" data-reactid="142"><span class="_3-JW" data-reactid="143">Water</span></a><a
+              href="https://paytm.com/devotion" class="_3t0b" title="Devotion" target="_top" data-reactid="144"><img
+                class="_10lp"
+                src="data:image/png;base64,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"
+                alt="Devotion" data-reactid="145"><span class="_3-JW" data-reactid="146">Devotion</span></a><a
+              href="https://paytm.com/credit-card-bill-payment" class="_3t0b" title="Credit Card" target="_top"
+              data-reactid="147"><img class="_10lp"
+                src="data:image/png;base64,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"
+                alt="Credit Card" data-reactid="148"><span class="_3-JW" data-reactid="149">Credit Card</span></a><a
+              href="https://paytm.com/education" class="_3t0b" title="Fee Payment" target="_top" data-reactid="150"><img
+                class="_10lp" src="https://assetscdn1.paytm.com/images/catalog/view_item/431163/1575978821935.png"
+                alt="Fee Payment" data-reactid="151"><span class="_3-JW" data-reactid="152">Fee Payment</span></a><a
+              href="https://paytm.com/google-play-gift-card-recharge" class="_3t0b" title="Google Play" target="_top"
+              data-reactid="153"><img class="_10lp"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGwAAABUCAMAAABQkSI/AAACYVBMVEUAAAAmNG8mNnEkNHInNnElNW8lNG4nOHAkNm8lNW4pOnMlNG4lNW8oNXIlNG8kNW4mNW8zRHclNW4kN3IkNm8lNG8mNm8zZpkkNG8mOXEmNXAkNW4nN3ElNW8lNW4mNW8kNG8oN24kNW8kNG4lNW8kNW4mNW8lNG4lNHAlNW8mNnIlNW8lNW4nN28kNW4kNW8mNnApNG4lNG4qNXElNW4lNG8oOHAkNW8lOHAkNG4lNm8kNW4mOXMlNW8lNnAlNG8oNnIlNG4mNm4lNG4pN24kNW4lNG8lNW8rOXElNW8lNW8lNW4mNXH///8lNG8wQHAkNG8nNnQkNW4lNW8kNG4lNm4kNG8lNXAlNW8rPG+AgIAlNW8lOG8lNW4sNXIkNG8kN3ElNG4kN3YmNW8kNG4mOXFVVaolNXAoOXEpPXAkNW8kNm8lNW8rNXUkNW8kN3MkNG8lNG4sN29AQIAlNW8kNW8lNW4uOnQlNW8mNG8nNG8kNW8kPXkkNG4lNXAkNG8mQHMlNW4kNG8lNG8oNnkkOnUlNG4lNW8rOXEkNW8kNG8nN3IlNW5AQIAlNW4mNG85OXEkNW8kNW4lNW8kN4AzTYAkNG4lNXAlNW4nO3YlNW4kNG8pOHAnO3YkNW4rQIAuRnQkNXEkNXAlNW8kNW8kNW4lNG8kNW8lNG4lNG8lNW8kNW8lNW8oNm8kNG8lNG8lNW4lNG8lNG8rVYAtPHglNW4kNW8kSZIkNW8kNW8nNG8lNG4mNHAmNW8kNW8kNm4lNW8kNW4lNG8lNW8kNW8lNm8lNm4lNG42NmsmNHAkNG6GJEu+AAAAynRSTlMAej0xNN3zO3GkH/ryOnX3iA/xOHfrbAXwNnnZT3zCNe8zfv6l7oH4ie0vg+wuhtpQLOori6Yg6SmNiucoj23mJpJR5SWUw+QklqfjIgGYEOEhm27gndtS3x4CnzfeHaFG3ByjfxsDgi0ZqIXYGKoqxNcXBKzo1RaujifUFbCQ0hSyk9ETI7nPEuLNQZkIu5wJvbeeDgq+oMcNwL8yGsUMC01pwfap1saryK3TvEevutBTtAYRzrYHuMtOyWuHaqLKzLWzsUxohBNJWTG+KAAAAAFvck5UAc+id5oAAAABc1JHQgCuzhzpAAADkklEQVRo3u2Z+TtUYRTH39JGC5OElJZRWkSEERVtiGztSSMjU0LJFC1aRJIihJrIUiKKFKV9X89f1T33zpg7Y8Yzj7nHL835Yeac7zmPz2Pucd7zDsbsZje7/R82YSK+OkwaF9jkKVPxbZqj0zjApsOMmfg+y9lFRg4DgNmu6MwBt7nu9DDw8ERvHoDXfHoYePD9sYDzvBeSw2DRYvSXcJ7cx4kaBksdMFiGru9yGTEMVqzEaBXv+1F1ih4Gfqsx9BeCgDUkMPkwzS0QYxdd5O1JCoOgtSgE6yJ5SCglDBRhqKzTh77hMkIYRKxHaYPhOW50p4NBZBRqmwxCwGY6GGzZiuI2kRLtSQaDmFhUt4sUeVwoFQzid3BqQqJY8g1PIoJBcgrSdhppfrvcaWCwGz+2hD3G4t59NDDYf4BLpB40UaPTSGBwSIm0dBNVfpgEBhkqpGUai0dofjPuEWVxOXWIWDqK5cds6hQLMPDKRtpxg5CD1YFBNnWKJRjk5iHthD50weKTCnTz0ySHwakCLq05LQTBWBt2Rpca60yxDIPCIqSdRfcclp6PMMyU4CSJYXChmCtwvwhwCSujIm2eKaPB4PIVpJVcxcLYGLB5powKg9IypGHdtfiR2fIiSWFwvUIoS7lhLluplhSm+3mqZPPZm9LCbiVgVVW1+ayrpLDbCUJZTa25bJ2kz+wOslT13EtD44ikPLFBStjdVK4iK+OeFmn3TZJNzZK2fiayHgQAtLRyTpu30TBrl3aC+CAr24s/pZHWGm3YnR9qpB1Xcdj0eblC8KiNC7QtQtCRo5V4ED9GVkHn8BPCZtB2YV+kq6Q+Yp7g51RUaBAaazihvhtqHSQ/PHuQVfxULD1DmqxX+h2kD4dvWamx+LyKZOEpQVZFv4nq/IIC9nKASwy+MpkXjkqKVe71EKcnVdo8L6yBveFZb42Xn3c0txi+DWTvxVLQBw0jgVXr/pwM1vGxnugyWFujHxT6vshUMkYD44dSa75objQzRgTjx63oKBnTOWIljD9IDIek4pOGkcH4I7KhSd8X/lrGyGBdWtFiI/+sZIwO1l0vWtkaHRgjhH3BL8Wqynm/s50xSthXvAIN1Qn7hZqRwioHOXfgmy37hdUw/vow8N2m/cJaWD9/MfoBNu0XVsKEK18fdP4k/u8I6xAus5oexS81NYsVCtf09N9aRm+9f/AruL8qZje72c1uluwfVqu+9VLHvP4AAAAASUVORK5CYII="
+                alt="Google Play" data-reactid="154"><span class="_3-JW" data-reactid="155">Google Play</span></a><a
+              href="https://paytm.com/municipal-payments" class="_3t0b" title="Municipal Payments" target="_top"
+              data-reactid="156"><img class="_10lp"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAAA4CAYAAABez76GAAAAAXNSR0IArs4c6QAACWdJREFUaAXtW31wVNUVP+e9/c4mjR+B6hSkFazkSyyonWhb0ASkascpYDu2op3plFbbOCabD+MY1rYoCdlMERHSOrZjnbZKpdjajwQyZCjUglISd+2IViRg/SITaWJ2l9333u15u9m37212N+/tZjcm4/sje+6555577u/de+55594AfPJ8gkA2CPDZNM62rdvt5g4MLd0Ac6p2Y0nVetPcqhPSBy+eyFbvVLbHqVRmRJe5vHGZAMIOYLBM3Y4M+o0dbXVjvoffV/Oni847QJ+qaD5vlIUfZgy+B8C4pANHOEuGtbSuLeqiWSYllckTM28AMcbQVFl/p8SgnWZNSXx8GETENgJrIcl8K86PUEdMZn5DuH9LfwI/b8W8AGQpd1WGQXqcgLlWMzLEP1vRXBv0bo74HVOl63pRZDsIrMsUOQQRGbf1ghLnxjN97o8Ufp6InAJ04bWNhcMjwo9pOf2IwFFtCDjIcXiv6O14PnGcC1c/aj1x+mQztbmf6qxKPeLbHGCt6Ov4g8LLA5EzgPgy1zclkDppDBfFx4EhROb5tLXop+8cdfvj/ImUdUnDopAgzzpWralFfMFqhh8Gj3kGNfwcFaYcIEtF/eVhCbbTMrleazP2Wnj+nnOvtB/X8tOX+ArX7RIjoBnMVSQR/MjwoS+XFHb29bkFhZ8DYsoAunip2/FecPRBhqyeBmOO24rvcMjqRF/nM3GeMap4ibt4RBh9ZMLOh+jjgW0QfJ3/MKZRv/SUAMRX1N8qSWwrdTtf6RpRQAbbzi/mNw4dah9V+FkQ5krXNYIkddELuEKlhtEgnnAWFTWPvOgeVvGnhMwKIGt5w6UhEB8lg7+qtQYPmjnT3SFvm1fLz760bt2z/HOv/fNeJsFDpM2paEQ4wzHeJb665SmFNwVERgAtWO62nRoaaaLQppl8jU2xA/EDjoNGYaDjKYptmMLPAWEvr5sXBKSXw27VqEfsMyP8IOT1vKbhZ1gwDBAtp9UU7G0jwy6N94kSAdJVZHK2nO13n43zc0/RbnmLBGwbvahL4r3RbslB+/wLCjed7HMH43zjlG6Axt/YzwiYr2u6QXzJRG8s7PUc1fDzWJhb6So4I7GNNGXvI/tMSteIb/LA3S34tvQoPIPEpAAtXdplPhZ6o44+Ax6kzgtU+oeR41pa1zh/Md3fSzGbLBVNFWEm7CQ7q2I8+Zdm9+/sdu6+sZe2vKfm66HTAmQqa1whorCdnPBilTJGHf6ywApNo0c9Qyr+x4KMfvM1fFdirI2AOk8xCvF/5BYfaF1TtMPIC00JEFfhamKStFnpQCYQBuh7gaZs7uIOTX9ZFJxX3l/iD4c8BNgdGjUIf5G8npv1biIpAcKyOjl2iW2jI6Swdc3iax7btes2UdNhFgVnpWuOX2Rt5DtWADI/Arf7c/Pm/+Q/f609l4VaTdPoKhAp78Q+H6swcbhMr89Mno8hTYiROOMj+n3abrNdLvk8W6cSHPlDdkyUDjNgd0V2IFrGjEkPvHl68PexgUzFr/Bq+/7SxYWVtKu1kr5hGs+uSstlr+jVnXIG6VWQqRxXVt9I4FAeaOLDc/gVwes5MLEm/5yUMygPpixJ1YfEMGVdqja54k8nQIOpBkXLIGVdqja54seDKoM90BJ5jJzreuRwk+TtSLpU0qk0m7knQ4JYSyGEQyuHr1/kvLjnbS0zeWmv/zZq/6XklXq4uAdW2nvTSWbkg+TUxrvBkbGIYvr+Yj5PPFeTrreEOlOFq1pk7EnaYeZFq/CwxcTWnxvofD1BdGJx37lSEMV/kYOPZx0nSqXmIJ4Ch70crsO0mYaMZpBfBIuq58wMJAWCt2MfxSmX2K5sXMgxiz8wsOm/uvd3Ufw+qSCAxt8xMicwpK2cqW2LmokYoJnWr7JZ3qZbJgNHls8IIE1HWRbGA7Y3DKtZ5aid0OZlZoYPw+XAhBaalWtV9TbgsBFq7AdVPF3kdDppXQYaElqGYaixHIOVjnUESBxAyssQYA2GdI0LT/sMysRopU23v4Ei8GqlrCYoP0vrKKQsOQY3Qs9Yt1oEkO+EGpuWpxH4GCyxBHv0F/cGloPENpNvSbMKZJBiD/kmBitjJfJBL4PJmnYHk2Vn7gySpOXkn3+tDDgpgaW0tK5SqhBJnpK18oN8G6zASU9EZi5AqwrckYGm+9M91kXV4wDhcfJN69OJJ6tLMz2Tic8gXm+QUsJ4p2IxBzsV2gAxOwHqCS6iIHKPEkQieGGBnc78jT8zd4nJW3cfnd2vwCD5GZ7oEggFSwmCteRmvk2/hRE4EP4NzFENi1B3DKqGMW8Amcvqr6KTxCaKdhO+vdTmJNB0s4MuLDxDFxaeTqgBOBD4DITYKej2h2BvwEwgJX42nSEnvhOcjkegiiLpDJ+8AUTgUDIdvkDTXr+pJCohW01Hzy+kPk6KbN/kbmhHYvAcKX8LeO4Q8Na/6dmlJjMmbwCR8edPZkzSero2E4RgMdWd1dRLdpohfh/pLY/w5eMe5PbR1/kTGrksC/kDSGUonb5+h175+yrWBJIOJ39Fy2bOhIoYQ/Y9vYGbgdK2BFI0m8DYdtgXOA7V9r/HxLL9nRaAzLylL9i/+WQ64+nQIO39oUjbG+yD0Ov/Gojkohmz0/K1UHS9G7oDV8Mq+1vp9Outm/nb/A2OI+SM7yAfFHVuDC4kz/UnOMiiu5heJFLIzXyA5IHVOGTnTBcplKcM/P7f0qzKenxZK1BMmm5ipaOdTPi5YgaDm6AnYDgVrLQfJ2YPQPKALI57aLn1xAfJXBQj0YaQ+TO7AJK/zosoWYbgUyCRKP7aG7hOKRskZhdA8uC/iCMUD91E1LtRLOSdTdoN+wMLomVjf2cfQPL4a+yn6O8tFGvFQoUSCEt/hP2U2Df4zE6AZBBWFRwFjt1OIEUTZAwqIByIO3GdQE1LoKjTtuzFagqeJ//zWVpy0XuUjBm+jje7AZIhji63jMGevUssY0i0DadgBjELV+6Kn0Fp9SsluvtTpBQMEiFBuIv6GNbfjDJoPH84PNB+RH+b5JLZA8TAzkCSb9nn7CFwNxpVLoiCaK1sLDP6vyGJ/WS0xGoWlY7Sx+GHicp0lREChcW2IR2yp3XIpBahPBLdn1bfyk0tm6YmMU2ZRlRbZb6i8WpRkL5Bu6j+WchQpFzQHj23x2xLmheEwuENdHKqP0WrMpHuOx6iVO2zKlZG5P8B0hUPvUEwC/4AAAAASUVORK5CYII="
+                alt="Municipal Payments" data-reactid="157"><span class="_3-JW" data-reactid="158">Municipal
+                Payments</span></a><a href="https://paytm.com/helpinghand" class="_3t0b" title="Donation" target="_top"
+              data-reactid="159"><img class="_10lp"
+                src="https://assetscdn1.paytm.com/images/catalog/view_item/423194/1561030370882.png" alt="Donation"
+                data-reactid="160"><span class="_3-JW" data-reactid="161">Donation</span></a><a
+              href="https://paytm.com/apartments-electricity-recharge" class="_3t0b" title="Apartments" target="_top"
+              data-reactid="162"><img class="_10lp"
+                src="https://assetscdn1.paytm.com/images/catalog/view_item/308355/1560923626552.png" alt="Apartments"
+                data-reactid="163"><span class="_3-JW" data-reactid="164">Apartments</span></a><a
+              href="https://paytm.com/toll-tag-recharge" class="_3t0b" title="Toll" target="_top"
+              data-reactid="165"><img class="_10lp"
+                src="data:image/png;base64,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"
+                alt="Toll" data-reactid="166"><span class="_3-JW" data-reactid="167">Toll</span></a><a
+              href="https://paytm.com/insurance-premium-payment" class="_3t0b" title="Insurance" target="_top"
+              data-reactid="168"><img class="_10lp"
+                src="data:image/png;base64,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"
+                alt="Insurance" data-reactid="169"><span class="_3-JW" data-reactid="170">Insurance</span></a><a
+              href="https://paytm.com/education/explore" class="_3t0b" title="Explore Colleges" target="_top"
+              data-reactid="171"><img class="_10lp"
+                src="https://assetscdn1.paytm.com/images/catalog/view_item/492763/1576753504240.png"
+                alt="Explore Colleges" data-reactid="172"><span class="_3-JW" data-reactid="173">Explore
+                Colleges</span></a></div>
+        </div><span class="_160X" data-reactid="174">More</span>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<app-transcation [mobileRechargeCheck]="mobileRechargeCheck" [electicityCheck]="electicityCheck"
+  [broadbandCheck]="broadbandCheck"></app-transcation>
+<app-items [items]="bookItem" class="_1s60" title="Book on Paytm"></app-items>
+<app-advertise></app-advertise>
+<app-items [items]="shopItem" class="_1H9O"></app-items>
+<app-items [items]="smartphones" class="_3Xyq" title="Smartphones at Best Price Online"></app-items>
 
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 
 
-<router-outlet></router-outlet>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="J3FT" data-reactid="1241">
+  <div class="_2H-U" data-reactid="1242"><i class="iconCare _35u5" data-reactid="1243"></i>
+    <div class="hyQe" data-reactid="1244">24x7 Help</div>
+    <div class="_26pb" data-reactid="1245"><b data-reactid="1246">
+        <!-- react-text: 1247 -->Have a query and need help? Click
+        <!-- /react-text --><a href="/care" target="_self" data-reactid="1248"> here</a><!-- react-text: 1249 -->.
+        <!-- /react-text --></b></div>
+  </div>
+  <div class="_2H-U" data-reactid="1250"><i class="iconTrust" data-reactid="1251"></i>
+    <div class="hyQe" data-reactid="1252">Paytm Trust</div>
+    <div class="_26pb" data-reactid="1253">Your money is yours! All refunds come with no question asked guarantee.</div>
+  </div>
+  <div class="_2H-U" data-reactid="1254"><i class="iconAssurance" data-reactid="1255"></i>
+    <div class="hyQe" data-reactid="1256">100% Assurance</div>
+    <div class="_26pb" data-reactid="1257">At Paytm, we provide 100% assurance. If you have any issue, your money is
+      immediately refunded. Sit back and enjoy your shopping.</div>
+  </div>
+  <div class="_2H-U" data-reactid="1258"><i class="iconPromise" data-reactid="1259"></i>
+    <div class="hyQe" data-reactid="1260">Our Promise</div>
+    <div class="_26pb" data-reactid="1261">Happiness is guaranteed at Paytm. If we fall short of your expectations, give
+      us a shout.</div>
+  </div>
+</div>
+<div class="_2RHx" data-reactid="1264">
+  <div class="_2raK" data-reactid="1265">
+    <h1><b>Online Recharge, Bill Payments, Entertainment, Travel Tickets And More At Paytm</b></h1>
+    <p>Paytm - India’s largest mobile e-commerce website is an ultimate destination for prompt <a
+        href="https://paytm.com/recharge">Online Recharge</a>, DTH, Data Card &amp; Metro Card Recharge and Mobile Bill
+      Payment for Airtel, Aircel, BSNL, Idea, MTNL, Vodafone &amp; other operators for all the circles across India.
+      Enjoy our online recharge and bill payment service along with best bonus packs of internet &amp; roaming within a
+      jiffy. <br><br>
+      Now you don’t have to look at various websites to find the best entertainment option in your city. You can book
+      movie tickets, event tickets and travel tickets within minutes on Paytm.com. Paytm login is very easy on the <a
+        href="http://paytm.com/download-paytm-app">Paytm app</a> and Paytm website. Just enter your number and
+      Password/OTP to login and process all the transactions instantly on Paytm. </p>
+    <h2><b>Mobile Recharge - Airtel, Vodafone, Idea, Jio, BSNL, MTNL, and More</b></h2>
+    <p>Now making an online recharge has become very easy and safe with your Paytm account on Paytm.com. Effortlessly
+      make payments through our safe methods, processed through secured gateways for <a
+        href="https://paytm.com/recharge/airtel-prepaid-mobile-online-recharge">Airtel Recharge</a>, <a
+        href="https://paytm.com/recharge/jio-prepaid-mobile-online-recharge">Jio Recharge</a>, <a
+        href="https://paytm.com/recharge/vodafone-prepaid-mobile-online-recharge">Vodafone Recharge</a>, <a
+        href="https://paytm.com/recharge/idea-prepaid-mobile-online-recharge">Idea Recharge</a>, <a
+        href="https://paytm.com/recharge/bsnl-prepaid-mobile-online-recharge">BSNL Recharge</a>. Paytm also provide you
+      with exciting cashback and offers on Paytm.<br><br>
+      All The Latest Plans And Packs For Your Mobile Recharge- Paytm makes it very easier for you to make recharge
+      online with Paytm. You can browse all the latest recharge plans and offers right on Paytm itself. More than that,
+      Paytm.com or Paytm app fetches your operator and circle automatically as soon as you enter your number, making the
+      process faster and easier for you. </p>
+    <h2><b>Online Tickets - Flight Tickets, Train Tickets, Bus Tickets And Hotels Booking with Great Ease</b></h2>
+    <p>Save money and time by booking your travel tickets on Paytm. You can find <a
+        href="https://paytm.com/flights">cheap flight tickets</a>, train tickets and bus tickets on Paytm. Compare the
+      prices, get schedules, pick the best-suited seat and experience easy ticket booking services online. You can also
+      save money on your travel by applying promo codes on flights, buses, trains &amp; <a
+        href="https://paytm.com/hotels">hotels bookings</a> to get cashback in your Paytm wallet on your travel
+      tickets.<br><br>
+      <b>Flight Tickets-</b> Make your flight booking online on Paytm to find cheap flight tickets and <a
+        href="https://paytm.com/offer/flight-tickets">flight tickets offers</a>. Just enter your boarding and
+      destination city to know all the flight tickets prices for both <a
+        href="https://paytm.com/flights/domestic-tickets">domestic flights</a> and <a
+        href="https://paytm.com/flights/international-tickets">international flights</a>.<br><br>
+      <b>Train Ticket Booking-</b> <a href="https://paytm.com/train-tickets/pnr-status">Check PNR status</a>, find train
+      schedule and get <a href="https://paytm.com/train-tickets/seat-availability">train seat availability</a> for your
+      online <a href="https://paytm.com/train-tickets">train ticket bookings</a>. Just enter your boarding and
+      destination station or city to know all the train ticket prices. Make instant train reservation through Paytm and
+      save money with cashback.<br><br>
+      <b>Bus Tickets-</b> Make fast online <a href="https://paytm.com/bus-tickets">bus ticket booking</a> for both AC
+      and Non-AC buses, private and government buses on Paytm. Find all the buses and timings along with <a
+        href="https://paytm.com/offer/bus-tickets/">bus ticket offers</a> for your bus tickets.</p>
+    <h3><b>Mobile, DTH and Data Card Recharge &amp; Payment On-The-Go</b></h3>
+    <p>No need to rush to the market for <a href="https://paytm.com/dth-recharge">DTH Recharge</a> or <a
+        href="https://paytm.com/mobile-bill-payment">Mobile Bill Payment</a>, just login to Paytm and make immediate
+      payments. Cherish your experience with exciting Cashback and Discounts on every recharge or bill payment you make
+      with us. Our online recharge and bill payment service is a one-stop solution for fast &amp; easy Prepaid Mobiles,
+      DTH &amp; <a href="https://paytm.com/datacard-recharge">Data Card recharge</a> and Postpaid Mobiles.<br><br>
+      <b>DTH Recharge-</b> Make DTH recharge online and get DTH recharge offers on Paytm. <a
+        href="https://paytm.com/dth-recharge/tata-sky">Tata sky recharge</a>, <a
+        href="https://paytm.com/dth-recharge/airtel-digital-tv">Airtel DTH recharge</a>, <a
+        href="https://paytm.com/dth-recharge/d2h">Videocon D2H recharge</a>, <a
+        href="https://paytm.com/dth-recharge/sun-direct">Sun Direct recharge</a>, <a
+        href="https://paytm.com/dth-recharge/dish-tv">Dish TV recharge</a> and more on Paytm.com. Find all the latest
+      DTH recharge offers and plans only on Paytm. <br><br>
+      <b>Data Card Recharge-</b> Get your <a href="https://paytm.com/datacard-recharge/airtel">Airtel Data Card
+        Recharge</a>, <a href="https://paytm.com/datacard-recharge/vodafone">Vodafone Data Card Recharge</a>, <a
+        href="https://paytm.com/datacard-recharge/jio">Jio Data Card Recharge</a>, <a
+        href="https://paytm.com/datacard-recharge/idea">Idea Data Card Recharge</a>, <a
+        href="https://paytm.com/datacard-recharge/idea">BSNL Data Card Recharge</a> and <a
+        href="https://paytm.com/datacard-recharge/mtnl">MTNL Data Card Recharge</a> now on Paytm.com and avail cashback
+      by applying promo codes. <br><br>
+      <b>Data Card Bill Payment:</b> Pay your data card bills on your postpaid connection of <a
+        href="https://paytm.com/datacard-bill-payment/airtel">Airtel</a>, <a
+        href="https://paytm.com/datacard-bill-payment/idea">Idea</a>, <a
+        href="https://paytm.com/datacard-bill-payment/vodafone">Vodafone</a>.<br> <br>
+      Visit us and recharge your Prepaid Mobile, DTH and Data Card or Make Postpaid Mobile Bill Payments and other
+      Utility Bill Payments in a click and indulge into an unbelievable <a href="https://paytmmall.com">online
+        shopping</a> experience.</p>
+    <h3><b>Buy FASTag Online And Move Quickly Through the Toll Lanes:</b></h3>
+    <p>Avoid long queues at the toll lanes and move quickly through them with the help of Paytm <a
+        href="https://paytm.com/fastag">FASTag</a>. It is very easy to buy FASTag for your vehicle at Paytm in just a
+      few minutes. Order Toll-Tag now or just register for one at Paytm instantly and drive freely with the toll tags.
+    </p>
+    <h3><b>Online Bill Payment Postpaid Bills, Quick Utility Bill, Insurance, Loan &amp; Education Fee Payment</b></h3>
+    <p><b>Postpaid Bill Payment-</b> Mobile Post-paid bill payments for all the renowned operators such as <a
+        href="https://paytm.com/mobile-bill-payment/airtel-postpaid">Airtel</a>, <a
+        href="https://paytm.com/mobile-bill-payment/vodafone-postpaid">Vodafone</a>, <a
+        href="https://paytm.com/mobile-bill-payment/jio-postpaid">Jio</a>, <a
+        href="https://paytm.com/mobile-bill-payment/bsnl-postpaid">BSNL</a>, <a
+        href="https://paytm.com/mobile-bill-payment/idea-postpaid">Idea</a> are available on Paytm.com. <br><br>
+      Pay <a href="https://paytm.com/electricity-bill-payment">Electricity Bill</a>, <a
+        href="https://paytm.com/gas-bill-payment">Gas Bill</a> &amp; <a
+        href="https://paytm.com/water-bill-payment">Water Bill</a> instantly in just a few clicks Enjoy uncomplicated
+      utility bill online payment service without even travelling to the stores at Paytm. We are no doubt a reliable
+      platform for speedy electricity, gas &amp; water bill payment.<br><br>
+      <b>Electricity Bill Payment-</b> Pay your electricity bills online on Paytm.com and avoid waiting in the queues
+      for hours with Paytm.com. Pay electricity bills in <a href="https://paytm.com/electricity-bill-payment/goa">Goa
+        Electricity Bill Payment</a>, <a href="https://paytm.com/electricity-bill-payment/bihar">Bihar Electricity Bill
+        Payment</a>, <a href="https://paytm.com/electricity-bill-payment/haryana">Haryana Electricity Bill Payment</a>,
+      <a href="https://paytm.com/electricity-bill-payment/maharashtra">Maharashtra Electricity Bill Payment</a>, <a
+        href="https://paytm.com/electricity-bill-payment/punjab">Punjab Electricity Bill Payment</a>, <a
+        href="https://paytm.com/electricity-bill-payment/telangana">Telangana Electricity Bill Payment</a> and many more
+      cities. <br><br>
+      <b>Gas And Water Bill Payment-</b> Pay your water bills within seconds in of <a
+        href="https://paytm.com/water-bill-payment/delhi-jal-board-djb">Delhi Jal Board</a>, <a
+        href="https://paytm.com/water-bill-payment/indore-municipal-corporation-water">Indore Municipal Corporation</a>,
+      <a href="https://paytm.com/water-bill-payment/gwalior-municipal-corporation-water">Gwalior Municipal
+        Corporation</a>, <a href="https://paytm.com/water-bill-payment/bhopal-municipal-corporation-water">Bhopal
+        Municipal Corporation</a>, <a
+        href="https://paytm.com/water-bill-payment/bangalore-water-supply-and-sewerage-board-bwssb">Bangalore Water
+        Supply and Sewage Board</a>, <a
+        href="https://paytm.com/water-bill-payment/surat-municipal-corporation-water">Surat Municipal Corporation</a>,
+      <a href="https://paytm.com/water-bill-payment/pune-municipal-corporation-water">Pune Municipal Corporation</a>, <a
+        href="https://paytm.com/water-bill-payment/nagpur-municipal-corporation-orange-city-water-nagpur">Nagpur
+        Municipal Corporation</a>, <a href="https://paytm.com/water-bill-payment/uttarakhand-jal-sansthan">Uttrakhand
+        Jal Sansthan</a> and more.<br><br>
+      Pay gas bills of <a href="https://paytm.com/gas-bill-payment/indraprastha-gas-limited">Indraprastha Gas
+        Limited</a>, <a href="https://paytm.com/gas-bill-payment/gujarat-gas-limited">Gujarat Gas Limited</a>, <a
+        href="https://paytm.com/gas-bill-payment/adani-gas-limited">Adani Gas Limited</a>, <a
+        href="https://paytm.com/gas-bill-payment/aavantika-gas-ltd">Aavantika Gas Limited</a>, <a
+        href="https://paytm.com/gas-bill-payment/vadodara-gas-limited-vgl">Vadodara Gas Limited</a>, <a
+        href="https://paytm.com/gas-bill-payment/maharashtra-natural-gas-limited-mngl">Maharashtra Natural Gas Ltd</a>
+      and more. <br><br>
+      <b>Fee Payment, Metro Card Recharge, Insurance Premium and Gold Loan-</b> Forget those gigantic queues, <a
+        href="https://paytm.com/education">pay admission fee</a> or registration fee for various Institutes, Schools
+      &amp; Colleges online here and save your time. We ensure to provide you with a seamless and speedy service every
+      time you visit us. Now you can also <a href="https://paytm.com/metro-card-recharge">recharge metro card</a> and
+      instantly <a href="https://paytm.com/insurance-premium-payment">pay insurance premium</a> &amp; gold loan online
+      with Paytm through the comfort of wherever you are.<br><br>
+      <b>Landline And Broadband Bill Payment-</b> Pay landline and broadband bills of all the major operators such as <a
+        href="https://paytm.com/landline-bill-payment/airtel">Airtel</a>, <a
+        href="https://paytm.com/landline-bill-payment/bsnl">BSNL</a>, <a
+        href="https://paytm.com/broadband-bill-payment/hathway-broadband">Hathway</a>, <a
+        href="https://paytm.com/broadband-bill-payment/asianet-broadband">Asianet Broadband</a>, <a
+        href="https://paytm.com/broadband-bill-payment/alliance-broadband">Alliance Broadband</a>, <a
+        href="https://paytm.com/broadband-bill-payment/tata-tele-broadband">Tata</a> and many more at Paytm.com.</p>
+    <h3>Mutual Fund Investments made Simple, Transparent and Accessible with Paytm Money</h3>
+    <p>Ab Mutual Funds ke liye bhi Paytm Karo. Presenting, Paytm Money - India's Most Sincere Wealth Adviser. You can
+      now begin your <a href="https://www.paytmmoney.com/">mutual fund investment</a> journey on the Paytm Money App
+      with 100% paperless KYC verification. Open your investment account within minutes &amp; start an SIP in mutual
+      funds with just Rs.100 on the very same day. Take an assessment of your appetite for risk with our Free Risk
+      Profile Assessment. Explore and invest in the <a
+        href="https://www.paytmmoney.com/mutual-funds/best-return-funds">best mutual funds</a> rated by leading research
+      agencies and achieve your personal and financial goals.</p>
+    <p>At Paytm Money, you can manage your SIPs, request portfolio-related statements and view the latest portfolio
+      updates. Enjoy the <a href="https://www.paytmmoney.com/mutual-funds/benefits/">Mutual Fund benefits</a> of
+      absolutely secure investments on the Paytm Money platform with convenient payment options like Net Banking, UPI
+      and auto-Pay.</p>
+    <h3><b>Money Bank Transfer Made Instant &amp; Easy With Paytm\u0021</b></h3>
+    <p>Transferring money directly to the bank from Paytm is instant and free of cost using Paytm app. Yes, any Paytm
+      user can make a <a href="https://paytm.com/offer/bank-transfer/">bank transfer</a> anytime and anywhere in less
+      than a minute. You can link any bank account using Paytm’s UPI services and no KYC is needed. Moreover, you also
+      get a Cashback of Rs. 50 on your first bank transfer with Paytm. To make money transfer process fast &amp;
+      trouble-free, you can link your account with Paytm in just a few simple steps. Next, you just have to enter the
+      details of the account holder, precisely IFSC code and account number &amp; you are all set to make a bank
+      transfer at 0% charges\u0021</p>
+    <h4><b>Events, Movies and Endless Entertainment- Live, Laugh, Enjoy with Paytm.com\u0021</b></h4>
+    <p>Relive the moment and revive your daily routine with an amazing experience at an incredible amusement park. Book
+      tickets for theme parks &amp; water parks in seconds at Paytm.com and get ready to make your day an adventurous
+      one. Enjoy the hottest buzz in the town, do not miss out the latest shows and events of your favourite artists, be
+      it music concert or a carnival, book your tickets online at our portal and catch the beats without any hassle. Our
+      entertainment section enables you to book tickets online for <a href="https://paytm.com/movies">Movies</a>, <a
+        href="https://paytm.com/events">Events</a>, <a href="https://paytm.com/amusement-parks">Amusement Parks</a>
+      &amp; Water Parks at the matter of a few clicks and escape from your busy schedule.<br><br>
+      <b>Movie Ticket Booking-</b> Find movie showtimes, movie theatres to book your movie tickets online and get movie
+      ticket offers only on Paytm.com <br><br>
+      Paytm’s <a href="https://paytm.com/care/ticket">24x7</a> Help is always at your service to assist you in case of
+      any difficulties.</p>
+    <h4><b>Online Shopping- Find Best Deals Online On Groceries, Appliances And Latest Smart Phones at Paytm</b></h4>
+    <p>Tech Fanatics, if you are eager to buy the best <a
+        href="https://paytmmall.com/mobiles-tablets-clpid-6942">mobile</a> phones then here is an ultimate mobile
+      destination for you. Discover the wide selection of mobiles like VIVO V15 Pro, Oppo F11 Pro, Samsung Galaxy A50,
+      iPhone X, Redmi Y2, Lenovo K8 Note, VIVO Y55S, Redmi Note 6 Pro so on that offers the perfect combination of
+      performance and exciting features. There is a lot more for you to explore, check out the exhaustive collection of
+      the latest smartphones at great discounts and Cashbacks on Paytm Mall.
+      Add a brand new vehicle to your collection, enjoy the exclusive online pre-booking service for <a
+        href="https://paytmmall.com/cars-bikes-clpid-836">new cars &amp; bikes</a> at Paytm. Be the first one to bring
+      home the newly launched automobile, forget sweating for owning the latest car &amp; bike in the town. With Paytm,
+      you can make pre-booking online for cars &amp; bikes in seconds along with exclusive offers that are especially
+      for you. <br><br>
+      Cashback would be added as Paytm Cash, which is One97 Communication Ltd’s loyalty program. It can be used to pay
+      for goods &amp; services sold by merchants that accept ‘Pay with Paytm’.<br><br>
+      Grab jaw-dropping <a href="https://paytm.com/coupons">Paytm Coupons</a>, Deals, Discounts &amp; Cashback Offers
+      while shopping, who wouldn’t love to shop at discounted prices\u0021 Paytm presents several <a
+        href="https://paytm.com/offer/">offers</a> across a huge range of products under our stimulating stores. Shop
+      more &amp; save even more at Sunday Bazaar, Bargain Bazaar and Under 199 stores. Double the joy of weekend
+      shopping, avail electrifying offers at our Sunday Bazaar, this is surely going to make your Sunday more
+      amazing\u0021 Buy your favourites at the lowest price possible with tons of discounts at Under 199 Store and shop
+      more with smartness from our irresistible Bargain Bazaar.</p>
+    <h4><b>Frequently Asked Questions</b></h4>
+    <p><b>What is Paytm?</b><br>Paytm stands for Pay through mobile and it is India’s largest mobile payments and
+      commerce platform. It lets you transfer money instantly to anyone at zero cost using the Paytm Wallet. You can
+      make cashless transactions at several places like taxi and autos, petrol pumps, grocery shops, restaurants, coffee
+      shops, multiplexes, and many more. You can also use Paytm to pay for online recharges, utility bill payments, book
+      movie or travel tickets among other things on the Paytm app or website.<br><br>
+      <b>How to create Paytm account?</b><br>1. Open your Paytm app<br>2. Tap on ‘Create A New Account’ <br>3. Enter
+      your mobile that you want to use for Paytm, email address and a password<br>4. Tap on ‘Create a New Account’
+      <br>5. Enter the OTP that you will receive on your mobile number and click on ‘Submit’ <br>6. Enter your First
+      Name, Last Name and DOB<br>7. Click on ‘Create Account’<br>8. Your account has been created<br><br>
+      <b>How to use Paytm?</b><br>You can use Paytm for many different things such as online recharge, shopping, pay
+      fees, bills and a lot more thing. You will need to at least one of your bank account to your Paytm account and
+      then you can enjoy India’s fastest online transactions and payment service. <br><br>
+      <b>How to transfer money back from Paytm to bank account?</b><br>Follow the steps to transfer money from Paytm
+      wallet to a bank account-<br> 1. Open your ‘Passbook in your Paytm app<br>2. Click on ‘Send Money to Bank’<br>3.
+      Enter the transaction amount and account details<br>4. Click on ‘Proceed’<br>5. Your transaction is complete.
+      <br><br>
+      Note that Paytm charges you 4% of the transaction when you transfer money from your Paytm wallet to a bank
+      account. <br><br>
+      <b>How to do KYC in Paytm?</b><br>To do your KYC in Paytm, you need to log in to your account on Paytm app and
+      follow these steps-<br>1. Go to your ‘My Profile Settings’ section in Paytm app.<br> 2. Tap on ‘Complete your KYC’
+      <br>3. Select your state and district<br>4. You will see a list of KYC centres as per the details you have filled.
+      Go to the nearby KYC store to complete your KYC. You will have to carry the required documents such as Aadhar
+      card, Voter ID card, PAN card etc. <br><br>
+      <b>How to get free Paytm cash back?</b><br>You can get free Paytm cash back by applying promo codes while you are
+      proceeding your transactions. Tap on ‘Cashback’ on the top right corner of your Paytm app to find daily promo
+      codes and offers. You can get additional cash back by purchasing a gift voucher on Paytm. <br><br>
+      <b>How to add beneficiary in Paytm?</b><br>1. Go to ‘My Payment Settings’ on Paytm app. <br>2. Tap on ‘Manage
+      Beneficiaries’<br>3. Tap on ‘Add New Beneficiary’<br>4. Enter account details or wallet number of the beneficiary.
+      <br>5. Tap on ‘Add Beneficiary’ <br>6. Enter OTP received on your number<br>7. Beneficiary is added
+      succesfully<br><br>
+      <b>How to add money in Paytm wallet?</b><br>To add money in your Paytm wallet follow these simple steps-<br>1. Go
+      to your ‘Passbook’<br>2. Tap on ‘Paytm Wallet’<br>3. Tap on ‘Add money to Paytm Wallet’<br>4. Enter the amount you
+      want to add in your wallet and click on ‘Add Money’<br>5. Select your mode of the transaction- bank account, debit
+      card, credit card, net banking or BHIM UPI<br>6. Enter account/card details and tap on ‘Pay Securely’<br>7. Enter
+      OTP that you will receive on your mobile number<br>8. Money is added in your wallet<br><br>
+      <b>How to pay through Paytm?</b><br>1. Tap on ‘Pay’ on Paytm app<br>2. Scan the QR code or enter the number of the
+      beneficiary that you want to pay<br>3. Enter the amount<br>4. Pay using your Paytm wallet or add money to your
+      Paytm wallet from your bank account if the wallet has insufficient funds<br>5. The money is paid to the
+      beneficiary<br><br>
+      <b>How to use Paytm in Hindi?</b><br>1. Download Paytm App from here<br>2. Tap on the top left corner button on
+      your Paytm app<br>3. Tap on ‘Choose Language’<br>4. Select ‘Hindi’ as the language and tap on ‘Continue’ <br>5.
+      You can use your Paytm app in Hindi now<br><br>
+      <b> How to contact Paytm customer care executive? </b><br>You can get in touch with the customer care executive by
+      calling at one of the following Paytm customer care numbers-<br>1. Bank, Wallet and Payments- 0120-4456-456<br>2.
+      Movies and Events Tickets- 0120-4728-728<br>3. Paytm Mall Shopping Orders- 0120-4606060<br>4. Paytm Travel Tickets
+      and Forex- 0120-4880-880<br><br>
+      <b>How to pay electricity bill by Paytm?</b><br>1. Go to electricity bill payment page on Paytm website or Paytm
+      app<br>2. Select your state<br>3. Select your board<br>4. Enter your consumer number<br>5. Pay your bill through
+      debit card, credit card, net banking or Paytm wallet<br><br>
+      <b>How to reset Paytm password?</b><br>1. Tap on ‘My Security Settings’ on your Paytm app<br>2. Select ‘Change
+      Password’<br>3. Enter your current password<br>4. Enter a new password and retype your new password in the box
+      belowTap on ‘Save’<br>5. Your password has been changed</p>
+  </div>
+  <div class="_1ExV" data-reactid="1266">Cashback would be added as Paytm Cash, which is One97 Communication Ltd’s
+    loyalty program. It can be used to pay for goods &amp; services sold by merchants that accept ‘Pay with Paytm’</div>
+  <div class="_3yCU" data-reactid="1267">
+    <div class="_2LhZ" data-reactid="1268"><a href="https://paytm.com/about-us/" target="_self"
+        data-reactid="1269">About Us</a><a href="https://paytm.com/about-us/partner-with-us-2/" target="_self"
+        data-reactid="1270">Partner with us</a><a href="https://paytm.com/about-us/our-policies/#tandc" target="_self"
+        data-reactid="1271">Terms &amp; Conditions</a><a href="https://paytm.com/blog" target="_blank"
+        data-reactid="1272">Blog</a><a href="https://paytm.com/press" target="_blank" data-reactid="1273">Media</a><a
+        href="https://paytm.com/care" target="_self" data-reactid="1274">24x7 Help</a><a
+        href="https://paytm.com/about-us/our-policies/#grievance" target="_self" data-reactid="1275">Grievance
+        policy</a><a href="https://paytm.com/offer/bug-bounty/" target="_self" data-reactid="1276"> Bug bounty</a><a
+        href="/recharge-partners" data-reactid="1277">Recharge Partners</a></div>
+    <div class="_1afe" data-reactid="1278"><a rel="dofollow"
+        href="https://itunes.apple.com/in/app/mobile-recharge-bill-payments/id473941634?mt=8" data-reactid="1279"><i
+          class="iconApple _2XC0" data-reactid="1280"></i></a><a rel="dofollow"
+        href="http://www.windowsphone.com/en-us/store/app/paytm/43783c68-2cae-47e0-b326-e8eda1285885"
+        data-reactid="1281"><i class="iconWindows _7qWw" data-reactid="1282"></i></a><a rel="dofollow"
+        href="https://play.google.com/store/apps/details?id=net.one97.paytm" data-reactid="1283"><i
+          class="iconAndroid _39Ix" data-reactid="1284"></i></a><a href="/" class="z7-a" data-reactid="1285"></a><a
+        rel="dofollow" href="https://twitter.com/paytm" data-reactid="1286"><i class="iconTwitter _3Iep"
+          data-reactid="1287"></i></a><a rel="dofollow" href="https://facebook.com/paytm" data-reactid="1288"><i
+          class="iconFacebook adUs" data-reactid="1289"></i></a><a rel="dofollow"
+        href="https://in.pinterest.com/paytm_official/" data-reactid="1290"><i class="iconPinterest _1oXN"
+          data-reactid="1291"></i></a><a rel="dofollow" href="https://instagram.com/paytm/" data-reactid="1292"><i
+          class="iconInstagram _2a_O" data-reactid="1293"></i></a></div>
+  </div>
+  <div class="_2QZP" data-reactid="1294">
+    <div class="Sk-H" data-reactid="1295">
+      <div class="DHtu" data-reactid="1296"><span class="_1l73 _24Kq" data-reactid="1297"></span><span
+          class="_190x _24Kq" data-reactid="1298"></span><span class="jWav _24Kq" data-reactid="1299"></span><span
+          class="_1AUd _24Kq" data-reactid="1300"></span><span class="_2RCB _24Kq" data-reactid="1301"></span><span
+          class="_2tHN _24Kq" data-reactid="1302"></span><span class="_3wbm" data-reactid="1303">
+          <!-- react-text: 1304 -->Paytm Wallet is issued by
+          <!-- /react-text --><a href="https://www.paytmbank.com/home" target="_blank" class="_3gvZ"
+            data-reactid="1305">Paytm Payments Bank Limited.</a></span></div>
+      <div class="_2xws" data-reactid="1306">
+        <div class="_33nf" data-reactid="1307"><span class="_15j9 _24Kq" data-reactid="1308"></span><span class="_20PO"
+            data-reactid="1309">
+            <!-- react-text: 1310 -->Seller
+            <!-- /react-text --><span class="_2PzZ" data-reactid="1311">Become a Seller</span></span></div><a
+          href="http://paywithpaytm.com/" target="_blank" data-reactid="1312"><span class="_23Kp _24Kq"
+            data-reactid="1313"></span><span class="_20PO" data-reactid="1314">
+            <!-- react-text: 1315 -->Wallet
+            <!-- /react-text --><span class="_2PzZ" data-reactid="1316">Payment Services</span></span></a>
+      </div>
+    </div>
+    <div class="_1mRB" data-reactid="1317"><span class="_1nt6" data-reactid="1318">DISCLAIMER</span><span class="_2Pp1"
+        data-reactid="1319">
+        <!-- react-text: 1320 -->Please do not share your Paytm Wallet password, Credit/Debit card pin, other
+        confidential information with anyone even if he/she claims to be from Paytm. We advise our customers to
+        completely ignore such communications &amp; report to us at cybercell@paytm.com.&nbsp;
+        <!-- /react-text --><a href="https://paytm.com/security" target="_blank" data-reactid="1321">read
+          more</a></span></div>
+  </div>
+  <div class="_1XsR">
+    <div class="_3uld">Make Recharge &amp; Pay Bills, Book Movie, Event, Bus, Train, Flight Tickets Online at Paytm
+    </div>
+    <div class="_3_Uw">
+      <div class="BgLG">
+        <!-- react-text: 1557 -->Mobile Recharge
+        <!-- /react-text -->
+        <div class="_3YlP"></div>
+        <div class="_4uxf"></div>
+      </div>
+      <div class="BgLG">
+        <!-- react-text: 1561 -->Mobile Bill Payment
+        <!-- /react-text -->
+        <div class="_3YlP"></div>
+        <div class="_4uxf"></div>
+      </div>
+      <div class="BgLG">
+        <!-- react-text: 1565 -->Datacard Recharge
+        <!-- /react-text -->
+        <div class="_3YlP"></div>
+        <div class="_4uxf"></div>
+      </div>
+      <div class="BgLG">
+        <!-- react-text: 1569 -->Datacard Bill Payment
+        <!-- /react-text -->
+        <div class="_3YlP"></div>
+        <div class="_4uxf"></div>
+      </div>
+      <div class="BgLG">
+        <!-- react-text: 1573 -->Dth Recharge
+        <!-- /react-text -->
+        <div class="_3YlP"></div>
+        <div class="_4uxf"></div>
+      </div>
+      <div class="_3J5h"><a href="">
+          <!-- react-text: 1578 -->
+          <!-- /react-text -->
+          <!-- react-text: 1579 -->
+          <!-- /react-text --></a><a href="/recharge/airtel-prepaid-mobile-online-recharge">Airtel Recharge</a><a
+          href="/recharge/bsnl-prepaid-mobile-online-recharge">BSNL Recharge</a><a
+          href="/recharge/idea-prepaid-mobile-online-recharge">Idea Recharge</a><a
+          href="/recharge/jio-prepaid-mobile-online-recharge">Jio Recharge</a><a
+          href="/recharge/mtnl-prepaid-mobile-online-recharge">MTNL Recharge</a><a
+          href="/recharge/vodafone-prepaid-mobile-online-recharge">Vodafone Recharge</a></div>
+      <div class="_3J5h"><a href="">
+          <!-- react-text: 1588 -->
+          <!-- /react-text -->
+          <!-- react-text: 1589 -->
+          <!-- /react-text --></a><a href="/mobile-bill-payment/airtel-postpaid">Airtel Bill Payment</a><a
+          href="/mobile-bill-payment/bsnl-postpaid">BSNL Bill Payment</a><a
+          href="/mobile-bill-payment/idea-postpaid">Idea Bill Payment</a><a href="/mobile-bill-payment/jio-postpaid">Jio
+          Bill Payment</a><a href="/mobile-bill-payment/mtnl-dolphin-postpaid">MTNL DOLPHIN Bill Payment</a><a
+          href="/mobile-bill-payment/vodafone-postpaid">Vodafone Bill Payment</a></div>
+      <div class="_3J5h"><a href="">
+          <!-- react-text: 1598 -->
+          <!-- /react-text -->
+          <!-- react-text: 1599 -->
+          <!-- /react-text --></a><a href="/datacard-recharge/airtel">Airtel Datacard Recharge</a><a
+          href="/datacard-recharge/bsnl">BSNL Datacard Recharge</a><a href="/datacard-recharge/idea">Idea Datacard
+          Recharge</a><a href="/datacard-recharge/jio">Jio Datacard Recharge</a><a href="/datacard-recharge/mtnl">MTNL
+          Datacard Recharge</a><a href="/datacard-recharge/vodafone">Vodafone Datacard Recharge</a></div>
+      <div class="_3J5h"><a href="">
+          <!-- react-text: 1608 -->
+          <!-- /react-text -->
+          <!-- react-text: 1609 -->
+          <!-- /react-text --></a><a href="/datacard-bill-payment/airtel">Airtel Datacard Bill Payment</a><a
+          href="/datacard-bill-payment/bsnl">BSNL Datacard Bill Payment</a><a href="/datacard-bill-payment/idea">Idea
+          Datacard Bill Payment</a><a href="/datacard-bill-payment/mtnl">MTNL Datacard Bill Payment</a><a
+          href="/datacard-bill-payment/vodafone">Vodafone Datacard Bill Payment</a></div>
+      <div class="_3J5h"><a href="">
+          <!-- react-text: 1617 -->
+          <!-- /react-text -->
+          <!-- react-text: 1618 -->
+          <!-- /react-text --></a><a href="/dth-recharge/airtel-digital-tv">Airtel Digital TV Recharge</a><a
+          href="/dth-recharge/dish-tv">Dish TV Recharge</a><a href="/dth-recharge/sun-direct">Sun Direct Recharge</a><a
+          href="/dth-recharge/tata-sky">Tata Sky Recharge</a><a href="/dth-recharge/d2h">d2h Recharge</a></div>
+    </div>
+    <div class="_3_Uw">
+      <div class="BgLG">
+        <!-- react-text: 1626 -->Electricity Bill Payment
+        <!-- /react-text -->
+        <div class="_3YlP"></div>
+        <div class="_4uxf"></div>
+      </div>
+      <div class="BgLG">
+        <!-- react-text: 1630 -->Landline Bill Payment
+        <!-- /react-text -->
+        <div class="_3YlP"></div>
+        <div class="_4uxf"></div>
+      </div>
+      <div class="BgLG">
+        <!-- react-text: 1634 -->Broadband Bill Payment
+        <!-- /react-text -->
+        <div class="_3YlP"></div>
+        <div class="_4uxf"></div>
+      </div>
+      <div class="BgLG">
+        <!-- react-text: 1638 -->Gas Bill Payment
+        <!-- /react-text -->
+        <div class="_3YlP"></div>
+        <div class="_4uxf"></div>
+      </div>
+      <div class="BgLG">
+        <!-- react-text: 1642 -->Water Bill Payment
+        <!-- /react-text -->
+        <div class="_3YlP"></div>
+        <div class="_4uxf"></div>
+      </div>
+      <div class="_3J5h"><a href="">
+          <!-- react-text: 1647 -->
+          <!-- /react-text -->
+          <!-- react-text: 1648 -->
+          <!-- /react-text --></a><a href="/electricity-bill-payment/andhra-pradesh">Andhra Pradesh Electricity Bill
+          Payment</a><a href="/electricity-bill-payment/assam">Assam Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/bihar">Bihar Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/chhattisgarh">Chhattisgarh Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/dadra-and-nagar-haveli">Dadra and Nagar Haveli Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/daman-and-diu">Daman And Diu Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/goa">Goa Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/gujarat">Gujarat Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/haryana">Haryana Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/himachal-pradesh">Himachal Pradesh Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/jharkhand">Jharkhand Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/karnataka">Karnataka Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/kerala">Kerala Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/madhya-pradesh">Madhya Pradesh Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/maharashtra">Maharashtra Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/manipur">Manipur Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/meghalaya">Meghalaya Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/mizoram">Mizoram Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/nagaland">Nagaland Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/new-delhi">New Delhi Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/odisha">Odisha Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/pondicherry">Pondicherry Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/punjab">Punjab Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/rajasthan">Rajasthan Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/sikkim">Sikkim Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/tamil-nadu">Tamil Nadu Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/telangana">Telangana Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/tripura">Tripura Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/uttar-pradesh">Uttar Pradesh Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/uttarakhand">Uttarakhand Electricity Bill Payment</a><a
+          href="/electricity-bill-payment/west-bengal">West Bengal Electricity Bill Payment</a></div>
+      <div class="_3J5h"><a href="">
+          <!-- react-text: 1682 -->
+          <!-- /react-text -->
+          <!-- react-text: 1683 -->
+          <!-- /react-text --></a><a href="/landline-bill-payment/act-broadband">ACT Broadband Bill Payment</a><a
+          href="/landline-bill-payment/ani-network">ANI Network Bill Payment</a><a
+          href="/landline-bill-payment/airtel">Airtel Bill Payment</a><a
+          href="/landline-bill-payment/alliance-broadband">Alliance Broadband Bill Payment</a><a
+          href="/landline-bill-payment/asianet-broadband">Asianet Broadband Bill Payment</a><a
+          href="/landline-bill-payment/bsnl">BSNL Bill Payment</a><a
+          href="/landline-bill-payment/comway-broadband">Comway Broadband Bill Payment</a><a
+          href="/landline-bill-payment/connect">Connect Bill Payment</a><a
+          href="/landline-bill-payment/den-broadband">Den Broadband Bill Payment</a><a
+          href="/landline-bill-payment/dreamtel-broadband">Dreamtel Broadband Bill Payment</a><a
+          href="/landline-bill-payment/foxtel-broadband">Foxtel Broadband Bill Payment</a><a
+          href="/landline-bill-payment/fusionnet">Fusionnet Bill Payment</a><a
+          href="/landline-bill-payment/gigatel-networks">Gigatel Networks Bill Payment</a><a
+          href="/landline-bill-payment/hathway-broadband">Hathway Broadband Bill Payment</a><a
+          href="/landline-bill-payment/instalinks">INSTALINKS Bill Payment</a><a href="/landline-bill-payment/ion">ION
+          Bill Payment</a><a href="/landline-bill-payment/mtnl-delhi">MTNL Delhi Bill Payment</a><a
+          href="/landline-bill-payment/mtnl-mumbai">MTNL Mumbai Bill Payment</a><a
+          href="/landline-bill-payment/mach1-broadband">Mach1 Broadband Bill Payment</a><a
+          href="/landline-bill-payment/meghbela">Meghbela Bill Payment</a><a
+          href="/landline-bill-payment/microscan">Microscan Bill Payment</a><a
+          href="/landline-bill-payment/mnet-broadband">Mnet Broadband Bill Payment</a><a
+          href="/landline-bill-payment/nextra-broadband">Nextra Broadband Bill Payment</a><a
+          href="/landline-bill-payment/one-broadband">ONE Broadband Bill Payment</a><a
+          href="/landline-bill-payment/spectra">SPECTRA Bill Payment</a><a
+          href="/landline-bill-payment/sikka-broadband">Sikka Broadband Bill Payment</a><a
+          href="/landline-bill-payment/siti-broadband">Siti Broadband Bill Payment</a><a
+          href="/landline-bill-payment/ttn-broadband">TTN Broadband Bill Payment</a><a
+          href="/landline-bill-payment/tata-tele-broadband">Tata Tele Broadband Bill Payment</a><a
+          href="/landline-bill-payment/tikona-broadband">Tikona Broadband Bill Payment</a><a
+          href="/landline-bill-payment/timbl-broadband">Timbl Broadband Bill Payment</a><a
+          href="/landline-bill-payment/ucn-broadband">UCN Broadband Bill Payment</a><a
+          href="/landline-bill-payment/you-broadband">YOU Broadband Bill Payment</a></div>
+      <div class="_3J5h"><a href="">
+          <!-- react-text: 1719 -->
+          <!-- /react-text -->
+          <!-- react-text: 1720 -->
+          <!-- /react-text --></a><a href="/broadband-bill-payment/act-broadband">ACT Broadband</a><a
+          href="/broadband-bill-payment/ani-network">ANI Network Broadband</a><a
+          href="/broadband-bill-payment/airtel">Airtel Broadband</a><a
+          href="/broadband-bill-payment/alliance-broadband">Alliance Broadband</a><a
+          href="/broadband-bill-payment/asianet-broadband">Asianet Broadband</a><a
+          href="/broadband-bill-payment/bsnl">BSNL Broadband</a><a
+          href="/broadband-bill-payment/comway-broadband">Comway Broadband</a><a
+          href="/broadband-bill-payment/connect">Connect Broadband</a><a
+          href="/broadband-bill-payment/den-broadband">Den Broadband</a><a
+          href="/broadband-bill-payment/dreamtel-broadband">Dreamtel Broadband</a><a
+          href="/broadband-bill-payment/foxtel-broadband">Foxtel Broadband</a><a
+          href="/broadband-bill-payment/fusionnet">Fusionnet Broadband</a><a
+          href="/broadband-bill-payment/gigatel-networks">Gigatel Networks Broadband</a><a
+          href="/broadband-bill-payment/hathway-broadband">Hathway Broadband</a><a
+          href="/broadband-bill-payment/instalinks">INSTALINKS Broadband</a><a href="/broadband-bill-payment/ion">ION
+          Broadband</a><a href="/broadband-bill-payment/mtnl-delhi">MTNL Delhi Broadband</a><a
+          href="/broadband-bill-payment/mtnl-mumbai">MTNL Mumbai Broadband</a><a
+          href="/broadband-bill-payment/mach1-broadband">Mach1 Broadband</a><a
+          href="/broadband-bill-payment/meghbela">Meghbela Broadband</a><a
+          href="/broadband-bill-payment/microscan">Microscan Broadband</a><a
+          href="/broadband-bill-payment/mnet-broadband">Mnet Broadband</a><a
+          href="/broadband-bill-payment/nextra-broadband">Nextra Broadband</a><a
+          href="/broadband-bill-payment/one-broadband">ONE Broadband</a><a
+          href="/broadband-bill-payment/spectra">SPECTRA Broadband</a><a
+          href="/broadband-bill-payment/sikka-broadband">Sikka Broadband</a><a
+          href="/broadband-bill-payment/siti-broadband">Siti Broadband</a><a
+          href="/broadband-bill-payment/ttn-broadband">TTN Broadband</a><a
+          href="/broadband-bill-payment/tata-tele-broadband">Tata Tele Broadband</a><a
+          href="/broadband-bill-payment/tikona-broadband">Tikona Broadband</a><a
+          href="/broadband-bill-payment/timbl-broadband">Timbl Broadband</a><a
+          href="/broadband-bill-payment/ucn-broadband">UCN Broadband</a><a
+          href="/broadband-bill-payment/you-broadband">YOU Broadband</a></div>
+      <div class="_3J5h"><a href="">
+          <!-- react-text: 1756 -->
+          <!-- /react-text -->
+          <!-- react-text: 1757 -->
+          <!-- /react-text --></a><a href="/gas-bill-payment/aavantika-gas-ltd">Aavantika Gas Ltd</a><a
+          href="/gas-bill-payment/adani-gas-limited">Adani Gas Limited</a><a
+          href="/gas-bill-payment/central-u-p-gas-limited">Central U.P. Gas Limited</a><a
+          href="/gas-bill-payment/charotar-gas-sahakari-mandali-ltd">Charotar Gas Sahakari Mandali Ltd</a><a
+          href="/gas-bill-payment/gail-gas-limited">GAIL Gas Limited</a><a
+          href="/gas-bill-payment/green-gas-limited-ggl">Green Gas Limited(GGL)</a><a
+          href="/gas-bill-payment/gujarat-gas-limited">Gujarat Gas Limited</a><a
+          href="/gas-bill-payment/haryana-city-gas-kapil-chopra-enterprise">Haryana City Gas - Kapil Chopra
+          Enterprise</a><a href="/gas-bill-payment/irm-energy-private-limited">IRM Energy Private Limited</a><a
+          href="/gas-bill-payment/indian-oil-adani-gas-private-limited">Indian Oil-Adani Gas Private Limited</a><a
+          href="/gas-bill-payment/indraprastha-gas-limited">Indraprastha Gas Limited</a><a
+          href="/gas-bill-payment/mahanagar-gas-mumbai">Mahanagar Gas- Mumbai</a><a
+          href="/gas-bill-payment/maharashtra-natural-gas-limited-mngl">Maharashtra Natural Gas Limited (MNGL)</a><a
+          href="/gas-bill-payment/sabarmati-gas-limited-sgl">Sabarmati Gas Limited (SGL)</a><a
+          href="/gas-bill-payment/torrent-gas-moradabad-limited">Torrent Gas Moradabad Limited</a><a
+          href="/gas-bill-payment/tripura-natural-gas">Tripura Natural Gas</a><a
+          href="/gas-bill-payment/unique-central-piped-gases-pvt-ltd-ucpgpl">Unique Central Piped Gases Pvt Ltd
+          (UCPGPL)</a><a href="/gas-bill-payment/vadodara-gas-limited-vgl">Vadodara Gas Limited (VGL)</a></div>
+      <div class="_3J5h"><a href="">
+          <!-- react-text: 1778 -->
+          <!-- /react-text -->
+          <!-- react-text: 1779 -->
+          <!-- /react-text --></a><a
+          href="/water-bill-payment/bangalore-water-supply-and-sewerage-board-bwssb">Bangalore Water Supply and Sewerage
+          Board (BWSSB)</a><a href="/water-bill-payment/bhopal-municipal-corporation-water">Bhopal Municipal Corporation
+          - Water</a><a href="/water-bill-payment/delhi-development-authority-dda-water">Delhi Development Authority
+          (DDA) - Water</a><a href="/water-bill-payment/delhi-jal-board-djb">Delhi Jal Board (DJB)</a><a
+          href="/water-bill-payment/department-of-public-health-engineering-water-mizoram">Department of Public Health
+          Engineering-Water,Mizoram</a><a
+          href="/water-bill-payment/greater-warangal-municipal-corporation-water">Greater Warangal Municipal Corporation
+          - Water</a><a href="/water-bill-payment/gwalior-municipal-corporation-water">Gwalior Municipal Corporation -
+          Water</a><a href="/water-bill-payment/haryana-urban-development-authority">Haryana Urban Development
+          Authority</a><a
+          href="/water-bill-payment/hyderabad-metropolitan-water-supply-and-sewerage-board-hmwssb">Hyderabad
+          Metropolitan Water Supply and Sewerage Board (HMWSSB)</a><a
+          href="/water-bill-payment/indore-municipal-corporation-water">Indore Municipal Corporation - Water</a><a
+          href="/water-bill-payment/jabalpur-municipal-corporation-water">Jabalpur Municipal Corporation - Water</a><a
+          href="/water-bill-payment/municipal-corporation-jalandhar-water">Municipal Corporation Jalandhar- Water</a><a
+          href="/water-bill-payment/municipal-corporation-of-amritsar">Municipal Corporation of Amritsar</a><a
+          href="/water-bill-payment/municipal-corporation-of-faridabad-water">Municipal Corporation of Faridabad
+          -Water</a><a href="/water-bill-payment/municipal-corporation-of-gurugram-mcg-water">Municipal Corporation of
+          Gurugram (MCG) -Water</a><a href="/water-bill-payment/municipal-corporation-of-ludhiana-water">Municipal
+          Corporation of Ludhiana -Water</a><a href="/water-bill-payment/mysuru-city-corporation">Mysuru City
+          Corporation</a><a href="/water-bill-payment/nagpur-municipal-corporation-orange-city-water-nagpur">Nagpur
+          Municipal Corporation- Orange City Water Nagpur</a><a
+          href="/water-bill-payment/nanded-waghala-city-municipal-corporation-water">Nanded Waghala City Municipal
+          Corporation -Water</a><a href="/water-bill-payment/new-delhi-municipal-council-ndmc-water">New Delhi Municipal
+          Council (NDMC) - Water</a><a href="/water-bill-payment/patna-municipal-corporation-gcc-tax">Patna Municipal
+          Corporation - GCC Tax</a><a href="/water-bill-payment/pimpri-chinchwad-municipal-corporation-pcmc">Pimpri
+          Chinchwad Municipal Corporation(PCMC)</a><a href="/water-bill-payment/pune-municipal-corporation-water">Pune
+          Municipal Corporation - Water</a><a href="/water-bill-payment/punjab-municipal-corporation-council">Punjab
+          Municipal Corporation/Council</a><a href="/water-bill-payment/ranchi-municipal-corporation">Ranchi Municipal
+          Corporation</a><a href="/water-bill-payment/silvassa-municipal-council">Silvassa Municipal Council</a><a
+          href="/water-bill-payment/surat-municipal-corporation-water">Surat Municipal Corporation - Water</a><a
+          href="/water-bill-payment/tumkur-city-corporation-water-and-ugd">Tumkur City Corporation-Water and UGD</a><a
+          href="/water-bill-payment/ujjain-nagar-nigam-phed-water">Ujjain Nagar Nigam- PHED- Water</a><a
+          href="/water-bill-payment/urban-improvement-trust-uit-bhiwadi">Urban Improvement Trust (UIT) - Bhiwadi</a><a
+          href="/water-bill-payment/uttarakhand-jal-sansthan">Uttarakhand Jal Sansthan</a></div>
+    </div>
+    <div class="_3_Uw">
+      <div class="BgLG">
+        <!-- react-text: 1813 -->Metro Card Recharge
+        <!-- /react-text -->
+        <div class="_3YlP"></div>
+        <div class="_4uxf"></div>
+      </div>
+      <div class="BgLG">
+        <!-- react-text: 1817 -->Municipal Recharge
+        <!-- /react-text -->
+        <div class="_3YlP"></div>
+        <div class="_4uxf"></div>
+      </div>
+      <div class="BgLG">
+        <!-- react-text: 1821 -->Toll Recharge
+        <!-- /react-text -->
+        <div class="_3YlP"></div>
+        <div class="_4uxf"></div>
+      </div>
+      <div class="BgLG">
+        <!-- react-text: 1825 -->Pay Loan EMI
+        <!-- /react-text -->
+        <div class="_3YlP"></div>
+        <div class="_4uxf"></div>
+      </div>
+      <div class="BgLG">
+        <!-- react-text: 1829 -->Pay Insurance Premium
+        <!-- /react-text -->
+        <div class="_3YlP"></div>
+        <div class="_4uxf"></div>
+      </div>
+      <div class="_3J5h"><a href="">
+          <!-- react-text: 1834 -->
+          <!-- /react-text -->
+          <!-- react-text: 1835 -->
+          <!-- /react-text --></a><a href="/metro-card-recharge/delhi-metro">Delhi Metro Card Recharge</a><a
+          href="/metro-card-recharge/hyderabad-metro">Hyderabad Metro Card Recharge</a><a
+          href="/metro-card-recharge/mumbai-metro">Mumbai Metro Card Recharge</a></div>
+      <div class="_3J5h"><a href="">
+          <!-- react-text: 1841 -->
+          <!-- /react-text -->
+          <!-- react-text: 1842 -->
+          <!-- /react-text --></a><a href="/municipal-payments/belagavi-city-corporation">Belagavi City
+          Corporation</a><a href="/municipal-payments/bilaspur-municipal-corporation-chattisgarh">Bilaspur Municipal
+          Corporation (Chattisgarh)</a><a href="/municipal-payments/greater-chennai-corporation">Greater Chennai
+          Corporation</a><a href="/municipal-payments/greater-visakhapatnam-municipal-corporation-gvmc">Greater
+          Visakhapatnam Municipal Corporation (GVMC)</a><a
+          href="/municipal-payments/greater-warangal-municipal-corporation">Greater Warangal Municipal Corporation</a><a
+          href="/municipal-payments/lansdowne-tax-payment">Lansdowne Tax Payment</a><a
+          href="/municipal-payments/municipal-corporation-of-faridabad">Municipal Corporation of Faridabad</a><a
+          href="/municipal-payments/municipal-corporation-of-gurugram-mcg">Municipal Corporation of Gurugram - MCG</a><a
+          href="/municipal-payments/municipal-corporation-of-karnal">Municipal Corporation of Karnal</a><a
+          href="/municipal-payments/municipal-corporation-of-panchkula">Municipal Corporation of Panchkula</a><a
+          href="/municipal-payments/municipal-corporation-of-sonepat">Municipal Corporation of Sonepat</a><a
+          href="/municipal-payments/nagar-nigam-aligarh">Nagar Nigam Aligarh</a><a
+          href="/municipal-payments/nanded-waghala-city-municipal-corporation">Nanded Waghala City Municipal
+          Corporation</a><a href="/municipal-payments/patna-municipal-corporation">Patna Municipal Corporation</a><a
+          href="/municipal-payments/pune-municipal-corporation">Pune Municipal Corporation</a><a
+          href="/municipal-payments/shivamogga-city-corporation">Shivamogga City Corporation</a><a
+          href="/municipal-payments/vasai-virar-city-municipal-corporation">Vasai Virar City Municipal Corporation</a><a
+          href="/municipal-payments/vijayapura-city-corporation">Vijayapura City Corporation</a></div>
+      <div class="_3J5h"><a href="">
+          <!-- react-text: 1863 -->
+          <!-- /react-text -->
+          <!-- react-text: 1864 -->
+          <!-- /react-text --></a><a href="/toll-tag-recharge/bangalore-elevated-tollway-pvt-ltd-betpl">Bangalore
+          Elevated Tollway Pvt. Ltd. (BETPL)</a><a href="/toll-tag-recharge/mep-mumbai-entry-exit-points">MEP - Mumbai
+          Entry/Exit Points</a><a href="/toll-tag-recharge/nice-e-pay">Nice E-Pay</a><a
+          href="/toll-tag-recharge/rajiv-gandhi-sea-link">Rajiv Gandhi Sea Link</a></div>
+      <div class="_3J5h"><a href="">
+          <!-- react-text: 1871 -->
+          <!-- /react-text -->
+          <!-- react-text: 1872 -->
+          <!-- /react-text --></a><a href="/loan-emi-payment/aeon-credit">AEON Credit</a><a
+          href="/loan-emi-payment/au-small-finance-bank-limited">AU Small Finance Bank Limited</a><a
+          href="/loan-emi-payment/aavas-financiers">Aavas Financiers</a><a
+          href="/loan-emi-payment/achiievers-gold-loan">Achiievers Gold Loan</a><a
+          href="/loan-emi-payment/aditya-birla-capital">Aditya Birla Capital</a><a
+          href="/loan-emi-payment/aditya-birla-housing-finance-limited">Aditya Birla Housing Finance Limited</a><a
+          href="/loan-emi-payment/bajaj-auto-finance">Bajaj Auto Finance</a><a
+          href="/loan-emi-payment/bajaj-finance-limited">Bajaj Finance Limited</a><a
+          href="/loan-emi-payment/bussan-auto-finance">Bussan Auto Finance</a><a
+          href="/loan-emi-payment/cholamandalam">CHOLAMANDALAM</a><a href="/loan-emi-payment/capital-float">Capital
+          Float</a><a href="/loan-emi-payment/capri-global-capital-limited">Capri Global Capital Limited</a><a
+          href="/loan-emi-payment/capri-global-housing-finance">Capri Global Housing Finance</a><a
+          href="/loan-emi-payment/credit-fair">Credit Fair</a><a href="/loan-emi-payment/credy">Credy</a><a
+          href="/loan-emi-payment/dmi-finance">DMI Finance</a><a href="/loan-emi-payment/dmi-housing-finance">DMI
+          Housing Finance</a><a href="/loan-emi-payment/dewan-housing-finance-corporation-limited">Dewan Housing Finance
+          Corporation Limited</a><a href="/loan-emi-payment/ess-kay-fincorp">ESS KAY FINCORP</a><a
+          href="/loan-emi-payment/faircent">Faircent</a><a href="/loan-emi-payment/fintree-finance">Fintree
+          Finance</a><a href="/loan-emi-payment/flexsalary">FlexSalary</a><a
+          href="/loan-emi-payment/fullerton-india">Fullerton India</a><a
+          href="/loan-emi-payment/hdb-financial-services">HDB Financial Services</a><a
+          href="/loan-emi-payment/hdfc-bank-ltd">HDFC Bank Ltd</a><a href="/loan-emi-payment/hdfc-home-loan">HDFC Home
+          Loan</a><a href="/loan-emi-payment/hero-fincorp">Hero FinCorp</a><a href="/loan-emi-payment/home-credit">Home
+          Credit</a><a href="/loan-emi-payment/idfc-first-bank-limited">IDFC First Bank Limited</a><a
+          href="/loan-emi-payment/indiabulls-housing-finance">INDIABULLS HOUSING FINANCE</a><a
+          href="/loan-emi-payment/indiabulls-consumer-finance-limited">Indiabulls Consumer Finance Limited</a><a
+          href="/loan-emi-payment/indiashelter-housing-finance">Indiashelter Housing Finance</a><a
+          href="/loan-emi-payment/kissht">Kissht</a><a href="/loan-emi-payment/kosamattam-finance">Kosamattam
+          Finance</a><a href="/loan-emi-payment/l-t-finance-limited">L&amp;T Finance Limited</a><a
+          href="/loan-emi-payment/l-t-housing-finance">L&amp;T Housing Finance</a><a
+          href="/loan-emi-payment/lendenclub">LenDenClub</a><a href="/loan-emi-payment/loan-through-paytm">Loan through
+          Paytm</a><a href="/loan-emi-payment/loantap">LoanTAP</a><a
+          href="/loan-emi-payment/loksuvidha">LokSuvidha</a><a
+          href="/loan-emi-payment/mas-financial-services-limited">MAS Financial Services Limited</a><a
+          href="/loan-emi-payment/mas-rural-housing-mortgage-finance-ltd">MAS Rural Housing &amp; Mortgage Finance
+          Ltd</a><a href="/loan-emi-payment/magma-fincorp-ltd">Magma Fincorp Ltd</a><a
+          href="/loan-emi-payment/manappuram">Manappuram</a><a
+          href="/loan-emi-payment/motilal-oswal-home-finance-limited">Motilal Oswal Home Finance Limited</a><a
+          href="/loan-emi-payment/muthoot-capital-service-ltd">Muthoot Capital Service Ltd</a><a
+          href="/loan-emi-payment/muthoot-finance-ltd">Muthoot Finance Ltd</a><a
+          href="/loan-emi-payment/muthoot-fincorp-ltd">Muthoot Fincorp Ltd.</a><a
+          href="/loan-emi-payment/neev-finance">Neev Finance</a><a href="/loan-emi-payment/nikon">Nikon</a><a
+          href="/loan-emi-payment/pnb-housing-finance-ltd">PNB Housing Finance Ltd.</a><a
+          href="/loan-emi-payment/paisadukan">PaisaDukan</a><a href="/loan-emi-payment/shriram-housing-finance">Shriram
+          Housing Finance</a><a href="/loan-emi-payment/shriram-transport-finance">Shriram Transport Finance</a><a
+          href="/loan-emi-payment/small-business-fincredit-india">Small Business Fincredit India</a><a
+          href="/loan-emi-payment/snapmint">Snapmint</a><a href="/loan-emi-payment/tvs-credit-services-limited">TVS
+          Credit Services Limited</a><a href="/loan-emi-payment/tata-capital-financial-services-limited">Tata Capital
+          Financial Services Limited</a><a href="/loan-emi-payment/toyota-financial-services">Toyota Financial
+          Services</a><a href="/loan-emi-payment/tribe3">Tribe3</a><a
+          href="/loan-emi-payment/ujjivan-small-finance-bank">Ujjivan Small Finance Bank</a><a
+          href="/loan-emi-payment/volkswagen-finance">Volkswagen Finance</a><a
+          href="/loan-emi-payment/wheelsemi">WheelsEMI</a><a href="/loan-emi-payment/zestmoney">ZestMoney</a><a
+          href="/loan-emi-payment/ziploan">Ziploan</a><a href="/loan-emi-payment/i2i-funding">i2i Funding</a></div>
+      <div class="_3J5h"><a href="">
+          <!-- react-text: 1941 -->
+          <!-- /react-text -->
+          <!-- react-text: 1942 -->
+          <!-- /react-text --></a><a href="/insurance-premium-payment/aditya-birla-sun-life-insurance">Aditya Birla Sun
+          Life Insurance</a><a href="/insurance-premium-payment/aegon-life-insurance">Aegon Life Insurance</a><a
+          href="/insurance-premium-payment/bajaj-allianz-life-insurance">Bajaj Allianz Life Insurance</a><a
+          href="/insurance-premium-payment/bharti-axa-life-insurance">Bharti AXA Life Insurance</a><a
+          href="/insurance-premium-payment/canara-hsbc-obc-life-insurance">Canara HSBC OBC Life Insurance</a><a
+          href="/insurance-premium-payment/edelweiss-tokio-life-insurance">Edelweiss Tokio Life Insurance</a><a
+          href="/insurance-premium-payment/exide-life-insurance">Exide Life Insurance</a><a
+          href="/insurance-premium-payment/future-generali-india-general-insurance">Future Generali India General
+          Insurance</a><a href="/insurance-premium-payment/future-generali-india-life-insurance">Future Generali India
+          Life Insurance</a><a href="/insurance-premium-payment/hdfc-ergo-general-insurance">HDFC Ergo General
+          Insurance</a><a href="/insurance-premium-payment/hdfc-life-insurance">HDFC Life Insurance</a><a
+          href="/insurance-premium-payment/icici-prudential-life-insurance">ICICI Prudential Life Insurance</a><a
+          href="/insurance-premium-payment/idbi-federal-life-insurance">IDBI Federal Life Insurance</a><a
+          href="/insurance-premium-payment/iffco-tokio-general-insurance">Iffco Tokio General Insurance</a><a
+          href="/insurance-premium-payment/indiafirst-life-insurance">IndiaFirst Life Insurance</a><a
+          href="/insurance-premium-payment/lic-of-india">LIC of India Insurance</a><a
+          href="/insurance-premium-payment/max-life-insurance">MAX Life Insurance</a><a
+          href="/insurance-premium-payment/magma-hdi-general-insurance">Magma HDI General Insurance</a><a
+          href="/insurance-premium-payment/pramerica-life-insurance-limited">Pramerica Life Insurance Limited</a><a
+          href="/insurance-premium-payment/reliance-general-insurance">Reliance General Insurance</a><a
+          href="/insurance-premium-payment/reliance-nippon-life-insurance">Reliance Nippon Life Insurance</a><a
+          href="/insurance-premium-payment/religare-health-insurance">Religare Health Insurance</a><a
+          href="/insurance-premium-payment/royal-sundaram-general-insurance">Royal Sundaram General Insurance</a><a
+          href="/insurance-premium-payment/sbi-general-insurance-limited">SBI General Insurance Limited</a><a
+          href="/insurance-premium-payment/sbi-life-insurance">SBI Life Insurance</a><a
+          href="/insurance-premium-payment/shriram-general-insurance">Shriram General Insurance</a><a
+          href="/insurance-premium-payment/shriram-life-insurance">Shriram Life Insurance</a><a
+          href="/insurance-premium-payment/star-health-and-allied-insurance">Star Health and Allied Insurance</a><a
+          href="/insurance-premium-payment/star-union-dai-ichi-life-insurance">Star Union Dai- Ichi Life Insurance</a><a
+          href="/insurance-premium-payment/tata-aia-life-insurance">TATA AIA Life Insurance</a><a
+          href="/insurance-premium-payment/the-oriental-insurance-company">The Oriental Insurance Company</a><a
+          href="/insurance-premium-payment/universal-sompo-general-insurance">Universal Sompo General Insurance</a>
+      </div>
+    </div>
+    <div class="_3_Uw">
+      <div class="BgLG">
+        <!-- react-text: 1977 -->Credit Bill Payment
+        <!-- /react-text -->
+        <div class="_3YlP"></div>
+        <div class="_4uxf"></div>
+      </div>
+      <div class="BgLG">
+        <!-- react-text: 1981 -->Cabletv Recharge
+        <!-- /react-text -->
+        <div class="_3YlP"></div>
+        <div class="_4uxf"></div>
+      </div>
+      <div class="BgLG">
+        <!-- react-text: 1985 -->Devotion
+        <!-- /react-text -->
+        <div class="_3YlP"></div>
+        <div class="_4uxf"></div>
+      </div>
+      <div class="BgLG">
+        <!-- react-text: 1989 -->Movie Ticket Booking
+        <!-- /react-text -->
+        <div class="_3YlP"></div>
+        <div class="_4uxf"></div>
+      </div>
+      <div class="BgLG">
+        <!-- react-text: 1993 -->Bus Ticket Booking
+        <!-- /react-text -->
+        <div class="_3YlP"></div>
+        <div class="_4uxf"></div>
+      </div>
+      <div class="_3J5h"><a href="">
+          <!-- react-text: 1998 -->
+          <!-- /react-text -->
+          <!-- react-text: 1999 -->
+          <!-- /react-text --></a><a href="/credit-card-bill-payment/indusind-bank">IndusInd Bank</a></div>
+      <div class="_3J5h"><a href="">
+          <!-- react-text: 2003 -->
+          <!-- /react-text -->
+          <!-- react-text: 2004 -->
+          <!-- /react-text --></a><a href="/cabletv-recharge/act-digital-tv">ACT Digital TV</a><a
+          href="/cabletv-recharge/gtpl-cable-tv">GTPL Cable TV</a><a href="/cabletv-recharge/hathway">Hathway</a><a
+          href="/cabletv-recharge/icc-network">ICC Network</a><a href="/cabletv-recharge/incable-digital-tv">InCable
+          Digital TV</a><a href="/cabletv-recharge/ucn-tv">UCN TV</a></div>
+      <div class="_3J5h"><a href="">
+          <!-- react-text: 2013 -->
+          <!-- /react-text -->
+          <!-- react-text: 2014 -->
+          <!-- /react-text --></a><a href="/devotion/banke-bihari-vrindavan">Banke Bihari Vrindavan</a><a
+          href="/devotion/dargah-hazrat-kamaluddin">Dargah Hazrat Kamaluddin</a><a
+          href="/devotion/iskcon-bangalore">ISKCON Bangalore</a><a href="/devotion/lalbaugcha-raja-ganpati">Lalbaugcha
+          Raja Ganpati</a><a href="/devotion/nizamuddin-dargah">Nizamuddin Dargah</a><a
+          href="/devotion/shree-kashi-vishwanath-mandir-trust">Shree Kashi Vishwanath Mandir Trust</a><a
+          href="/devotion/shree-lenyadri-ganpati-devsthan-trust">Shree Lenyadri Ganpati Devsthan Trust</a><a
+          href="/devotion/shri-badrinath-temple">Shri Badrinath Temple</a><a href="/devotion/shri-kedarnath-temple">Shri
+          Kedarnath Temple</a><a href="/devotion/somnath-temple">Somnath Temple</a><a
+          href="/devotion/vrindavan-chandrodaya-mandir">Vrindavan Chandrodaya Mandir</a></div>
+      <div class="_3J5h"><a href="">
+          <!-- react-text: 2028 -->
+          <!-- /react-text -->
+          <!-- react-text: 2029 -->
+          <!-- /react-text --></a><a href="https://paytm.com/movies/delhi-ncr">Delhi-NCR Movie Ticket Booking</a><a
+          href="https://paytm.com/movies/bengaluru">Bengaluru Movie Ticket Booking</a><a
+          href="https://paytm.com/movies/chennai">Chennai Movie Ticket Booking</a><a
+          href="https://paytm.com/movies/hyderabad">Hyderabad Movie Ticket Booking</a><a
+          href="https://paytm.com/movies/mumbai">Mumbai Movie Ticket Booking</a><a
+          href="https://paytm.com/movies/pune">Pune Movie Ticket Booking</a><a
+          href="https://paytm.com/movies/kolkata">Kolkata Movie Ticket Booking</a><a
+          href="https://paytm.com/movies/ahmedabad">Ahmedabad Movie Ticket Booking</a><a
+          href="https://paytm.com/movies/gurgaon">Gurgaon Movie Ticket Booking</a><a
+          href="https://paytm.com/movies/chandigarh">Chandigarh Movie Ticket Booking</a><a
+          href="https://paytm.com/movies/jaipur">Jaipur Movie Ticket Booking</a><a
+          href="https://paytm.com/movies/vizag">Vizag Movie Ticket Booking</a></div>
+      <div class="_3J5h"><a href="">
+          <!-- react-text: 2044 -->
+          <!-- /react-text -->
+          <!-- react-text: 2045 -->
+          <!-- /react-text --></a><a href="https://paytm.com/bus-tickets/bangalore-to-hyderabad-booking">Bangalore to
+          Hyderabad Bus</a><a href="https://paytm.com/bus-tickets/hyderabad-to-bangalore-booking">Hyderabad to Bangalore
+          Bus</a><a href="https://paytm.com/bus-tickets/bangalore-to-chennai-booking">Bangalore to Chennai Bus</a><a
+          href="https://paytm.com/bus-tickets/chennai-to-bangalore-booking">Chennai to Bangalore Bus</a><a
+          href="https://paytm.com/bus-tickets/hyderabad-to-vijayawada-booking">Hyderabad to Vijayawada Bus</a><a
+          href="https://paytm.com/bus-tickets/indore-to-bhopal-booking">Indore to Bhopal Bus</a><a
+          href="https://paytm.com/bus-tickets/bangalore-to-goa-booking">Bangalore to Goa Bus</a><a
+          href="https://paytm.com/bus-tickets/vijayawada-to-hyderabad-booking">Vijayawada to Hyderabad Bus</a><a
+          href="https://paytm.com/bus-tickets/hyderabad-to-guntur-booking">Hyderabad to Guntur Bus</a><a
+          href="https://paytm.com/bus-tickets/chennai-to-coimbatore-booking">Chennai to Coimbatore Bus</a><a
+          href="https://paytm.com/bus-tickets/bangalore-to-pune-booking">Bangalore to Pune Bus</a><a
+          href="https://paytm.com/bus-tickets/delhi-to-manali-booking">Delhi to Manali Bus</a><a
+          href="https://paytm.com/bus-tickets/mumbai-to-bangalore-booking">Mumbai to Bangalore Bus</a><a
+          href="https://paytm.com/bus-tickets/delhi-to-jaipur-booking">Delhi to Jaipur Bus</a><a
+          href="https://paytm.com/bus-tickets/pune-to-bangalore-booking">Pune to Bangalore Bus</a><a
+          href="https://paytm.com/bus-tickets/pune-to-goa-booking">Pune to Goa Bus</a><a
+          href="https://paytm.com/bus-tickets/delhi-to-chandigarh-booking">Delhi to Chandigarh Bus</a><a
+          href="https://paytm.com/offer/bus-tickets">Bus Offers</a></div>
+    </div>
+    <div class="_3_Uw">
+      <div class="BgLG">
+        <!-- react-text: 2066 -->Flight Tickets Booking
+        <!-- /react-text -->
+        <div class="_3YlP"></div>
+        <div class="_4uxf"></div>
+      </div>
+      <div class="BgLG">
+        <!-- react-text: 2070 -->Train Ticket Booking
+        <!-- /react-text -->
+        <div class="_3YlP"></div>
+        <div class="_4uxf"></div>
+      </div>
+      <div class="BgLG">
+        <!-- react-text: 2074 -->Events Booking
+        <!-- /react-text -->
+        <div class="_3YlP"></div>
+        <div class="_4uxf"></div>
+      </div>
+      <div class="BgLG">
+        <!-- react-text: 2078 -->Amusement Parks Booking
+        <!-- /react-text -->
+        <div class="_3YlP"></div>
+        <div class="_4uxf"></div>
+      </div>
+      <div class="BgLG">
+        <!-- react-text: 2082 -->Upcoming Movies
+        <!-- /react-text -->
+        <div class="_3YlP"></div>
+        <div class="_4uxf"></div>
+      </div>
+      <div class="_3J5h"><a href="">
+          <!-- react-text: 2087 -->
+          <!-- /react-text -->
+          <!-- react-text: 2088 -->
+          <!-- /react-text --></a><a href="https://paytm.com/flights/domestic-tickets">Domestic Flight Tickets</a><a
+          href="https://paytm.com/flights/international-tickets">International Flight Tickets</a><a
+          href="https://paytm.com/flights/bengaluru-to-delhi-flight-tickets">Bengaluru to Delhi Flight Tickets</a><a
+          href="https://paytm.com/flights/mumbai-to-delhi-flight-tickets">Mumbai to Delhi Flight Tickets</a><a
+          href="https://paytm.com/flights/delhi-to-kolkata-flight-tickets">Delhi to Kolkata Flight Tickets</a><a
+          href="https://paytm.com/flights/ahmedabad-to-mumbai-flight-tickets">Ahmedabad to Mumbai Flight Tickets</a><a
+          href="https://paytm.com/flights/mumbai-to-bengaluru-flight-tickets">Mumbai to Bengaluru Flight Tickets</a><a
+          href="https://paytm.com/flights/hyderabad-to-delhi-flight-tickets">Hyderabad to Delhi Flight Tickets</a><a
+          href="https://paytm.com/flights/delhi-to-goa-flight-tickets">Delhi to Goa Flight Tickets</a><a
+          href="https://paytm.com/flights/mumbai-to-chennai-flight-tickets">Mumbai to Chennai Flight Tickets</a><a
+          href="https://paytm.com/flights/pune-to-delhi-flight-tickets">Pune to Delhi Flight Tickets</a><a
+          href="https://paytm.com/flights/mumbai-to-goa-flight-tickets">Mumbai to Goa Flight Tickets</a><a
+          href="https://paytm.com/flights/bengaluru-to-mumbai-flight-tickets">Bangalore to Mumbai Flight Tickets</a><a
+          href="https://paytm.com/flights/chennai-to-mumbai-flight-tickets">Chennai to Mumbai Flight Tickets</a><a
+          href="https://paytm.com/flights/bengaluru-to-goa-flight-tickets">Bangalore to Goa Flight Tickets</a><a
+          href="https://paytm.com/flights/pune-to-bengaluru-flight-tickets">Pune to Bangalore Flight Tickets</a><a
+          href="https://paytm.com/offer/flight-tickets">Flight Offers</a></div>
+      <div class="_3J5h"><a href="">
+          <!-- react-text: 2108 -->
+          <!-- /react-text -->
+          <!-- react-text: 2109 -->
+          <!-- /react-text --></a><a href="https://paytm.com/train-tickets/train-running-status">Train Running
+          Status</a><a href="https://paytm.com/train-tickets/pnr-status">PNR Status</a><a
+          href="https://paytm.com/train-tickets/railway-enquiry">Railway Enquiry</a><a
+          href="https://paytm.com/train-tickets/seat-availability">Seat Availability</a><a
+          href="https://paytm.com/train-tickets/tatkal-railway-reservation">Tatkal Railway Reservation</a><a
+          href="https://paytm.com/train-tickets/railway-reservation-cancellation">Railway Reservation Cancellation</a><a
+          href="https://paytm.com/train-tickets/irctc-account-login">IRCTC Login</a><a
+          href="https://paytm.com/train-tickets/new-delhi-to-mumbai-trains">Delhi Mumbai Trains</a><a
+          href="https://paytm.com/train-tickets/ahmedabad-to-mumbai-trains">Ahmedabad Mumbai Trains</a><a
+          href="https://paytm.com/train-tickets/new-delhi-to-hyderabad-trains">Delhi Hyderabad Trains </a><a
+          href="https://paytm.com/train-tickets/mysore-to-bangalore-trains">Mysore Bangalore Trains</a><a
+          href="https://paytm.com/train-tickets/chennai-to-bangalore-trains">Chennai Bangalore Trains</a><a
+          href="https://paytm.com/train-tickets/ajmer-to-jaipur-trains">Ajmer Jaipur Trains</a><a
+          href="https://paytm.com/train-tickets/new-delhi-to-bangalore-trains">Delhi Bangalore Trains</a></div>
+      <div class="_3J5h"><a href="">
+          <!-- react-text: 2126 -->
+          <!-- /react-text -->
+          <!-- react-text: 2127 -->
+          <!-- /react-text --></a><a href="https://paytm.com/events/delhi-ncr">Events in Delhi</a><a
+          href="https://paytm.com/events/mumbai">Events in Mumbai</a><a href="https://paytm.com/events/bengaluru">Events
+          in Bengaluru</a><a href="https://paytm.com/events/hyderabad">Events in Hyderabad</a><a
+          href="https://paytm.com/events/chennai">Events in Chennai</a><a href="https://paytm.com/events/pune">Events in
+          Pune</a><a href="https://paytm.com/events/kolkata">Events in Kolkata</a><a
+          href="https://paytm.com/events/chandigarh">Events in Chandigarh</a><a
+          href="https://paytm.com/events/goa">Events in Goa</a></div>
+      <div class="_3J5h"><a href="">
+          <!-- react-text: 2139 -->
+          <!-- /react-text -->
+          <!-- react-text: 2140 -->
+          <!-- /react-text --></a><a href="https://paytm.com/amusement-parks/delhi-ncr">Amusement Parks in Delhi</a><a
+          href="https://paytm.com/amusement-parks/mumbai">Amusement Parks in Mumbai</a><a
+          href="https://paytm.com/amusement-parks/lonavala">Amusement Parks in Lonavala</a><a
+          href="https://paytm.com/amusement-parks/chennai">Amusement Parks in Chennai</a><a
+          href="https://paytm.com/amusement-parks/pune">Amusement Parks in Pune</a><a
+          href="https://paytm.com/amusement-parks/kolkata">Amusement Parks in Kolkata</a><a
+          href="https://paytm.com/amusement-parks/gurgaon">Amusement Parks in Gurgaon</a><a
+          href="https://paytm.com/amusement-parks/noida">Amusement Parks in Noida</a><a
+          href="https://paytm.com/amusement-parks/goa">Amusement Parks in Goa</a><a
+          href="https://paytm.com/amusement-parks/bengaluru">Amusement Parks in Bengaluru</a><a
+          href="https://paytm.com/amusement-parks/hyderabad">Amusement Parks in Hyderabad</a></div>
+      <div class="_3J5h"><a href="">
+          <!-- react-text: 2154 -->
+          <!-- /react-text -->
+          <!-- react-text: 2155 -->
+          <!-- /react-text --></a><a href="https://paytm.com/movies/upcoming-movies/hindi">Hindi</a><a
+          href="https://paytm.com/movies/upcoming-movies/english">English</a><a
+          href="https://paytm.com/movies/upcoming-movies/telugu">Telugu</a><a
+          href="https://paytm.com/movies/upcoming-movies/tamil">Tamil</a><a
+          href="https://paytm.com/movies/upcoming-movies/marathi">Marathi</a><a
+          href="https://paytm.com/movies/upcoming-movies/biography">Biography</a><a
+          href="https://paytm.com/movies/upcoming-movies/drama">Drama</a><a
+          href="https://paytm.com/movies/upcoming-movies/history">History</a><a
+          href="https://paytm.com/movies/upcoming-movies/action">Action</a><a
+          href="https://paytm.com/movies/upcoming-movies/thriller">Thriller</a><a
+          href="https://paytm.com/movies/upcoming-movies/sport">Sport</a><a
+          href="https://paytm.com/movies/upcoming-movies/fantasy">Fantasy</a><a
+          href="https://paytm.com/movies/upcoming-movies/animation">Animation</a><a
+          href="https://paytm.com/movies/upcoming-movies/romantic">Romantic</a><a
+          href="https://paytm.com/movies/upcoming-movies/comedy">Comedy</a><a
+          href="https://paytm.com/movies/upcoming-movies/adventure">Adventure</a><a
+          href="https://paytm.com/movies/upcoming-movies/horror">Horror</a><a
+          href="https://paytm.com/movies/upcoming-movies/mystery">Mystery</a><a
+          href="https://paytm.com/movies/upcoming-movies/sci-fi">Science and Fiction</a></div>
+    </div>
+    <div class="_3_Uw">
+      <div class="BgLG">
+        <!-- react-text: 2177 -->Mutual Fund Investments
+        <!-- /react-text -->
+        <div class="_3YlP"></div>
+        <div class="_4uxf"></div>
+      </div>
+      <div class="BgLG">
+        <!-- react-text: 2181 -->Buy Insurance
+        <!-- /react-text -->
+        <div class="_3YlP"></div>
+        <div class="_4uxf"></div>
+      </div>
+      <div class="BgLG">
+        <!-- react-text: 2185 -->Miscellaneous
+        <!-- /react-text -->
+        <div class="_3YlP"></div>
+        <div class="_4uxf"></div>
+      </div>
+      <div class="_3J5h"><a href="">
+          <!-- react-text: 2190 -->
+          <!-- /react-text -->
+          <!-- react-text: 2191 -->
+          <!-- /react-text --></a><a href="https://www.paytmmoney.com">Invest in Mututal Funds</a><a
+          href="https://www.paytmmoney.com/mutual-funds/equity-funds">Equity Funds</a><a
+          href="https://www.paytmmoney.com/mutual-funds/balanced-funds">Balanced Funds</a><a
+          href="https://www.paytmmoney.com/mutual-funds/debt-funds">Debt Funds</a><a
+          href="https://www.paytmmoney.com/mutual-funds/tax-saver-funds">ELSS Funds</a><a
+          href="https://www.paytmmoney.com/mutual-funds/insta-redemption-funds">Insta Redemption Funds</a><a
+          href="https://www.paytmmoney.com/mutual-funds/best-return-funds">Best Mutual Funds</a><a
+          href="https://www.paytmmoney.com/mutual-funds/amc/sbi-mutual-fund">SBI Mutual Fund</a><a
+          href="https://www.paytmmoney.com/mutual-funds/amc/hdfc-mutual-fund">HDFC Mutual Fund</a><a
+          href="https://www.paytmmoney.com/mutual-funds/amc/reliance-mutual-fund">Reliance Mutual Fund</a><a
+          href="https://www.paytmmoney.com/mutual-funds/amc/lnt-mutual-fund">L&amp;T Mutual Fund</a><a
+          href="https://www.paytmmoney.com/mutual-funds/amc/axis-mutual-fund">Axis Mutual Fund</a><a
+          href="https://www.paytmmoney.com/mutual-funds/amc/uti-mutual-fund">UTI Mutual Fund</a><a
+          href="https://www.paytmmoney.com/mutual-funds/amc/icici-prudential-mutual-fund">ICICI Mutual Fund</a><a
+          href="https://www.paytmmoney.com/mutual-funds/amc/kotak-mahindra-mutual-fund">Kotak Mutual Fund</a><a
+          href="https://www.paytmmoney.com/mutual-funds/amc/aditya-birla-sun-life-mutual-fund">Aditya Birla Mutual
+          Fund</a><a href="https://www.paytmmoney.com/mutual-funds/amc/idfc-mutual-fund">IDFC Mutual Fund</a><a
+          href="https://www.paytmmoney.com/mutual-funds/amc/sundaram-mutual-fund">Sundaram Mutual Fund</a><a
+          href="https://www.paytmmoney.com/mutual-funds/scheme/axis-long-term-equity-direct-plan-growth/inf846k01ew2">Axis
+          Long Term Equity Fund</a><a
+          href="https://www.paytmmoney.com/mutual-funds/scheme/sbi-bluechip-direct-plan-growth/inf200k01qx4">SBI
+          Bluechip Fund</a><a
+          href="https://www.paytmmoney.com/mutual-funds/scheme/mirae-asset-emerging-bluechip-fund-direct-growth/inf769k01bi1">Mirae
+          Asset Emerging Bluechip Fund</a><a
+          href="https://www.paytmmoney.com/mutual-funds/scheme/reliance-small-cap-fund-direct-growth/inf204k01k15">Reliance
+          Small Cap Fund</a><a
+          href="https://www.paytmmoney.com/mutual-funds/scheme/hdfc-balanced-advantage-fund-direct-plan-growth/inf179k01wa6">HDFC
+          Balanced Fund</a><a
+          href="https://www.paytmmoney.com/mutual-funds/scheme/kotak-standard-multicap-fund-direct-growth/inf174k01ls2">Kotak
+          Standard Multicap Fund</a><a
+          href="https://www.paytmmoney.com/mutual-funds/scheme/lnt-emerging-businesses-fund-direct-growth/inf917k01qa1">L&amp;T
+          Emerging Business Fund</a><a
+          href="https://www.paytmmoney.com/mutual-funds/scheme/lnt-india-value-fund-direct-growth/inf917k01hd4">L&amp;T
+          India Value Fund</a><a
+          href="https://www.paytmmoney.com/mutual-funds/scheme/franklin-india-smaller-companies-direct-fund-growth/inf090i01iq4">Franklin
+          India Smaller Companies Fund</a><a
+          href="https://www.paytmmoney.com/mutual-funds/scheme/hdfc-mid-cap-opportunities-direct-plan-growth/inf179k01xq0">HDFC
+          Midcap Opportunities Fund</a></div>
+      <div class="_3J5h"><a href="">
+          <!-- react-text: 2222 -->
+          <!-- /react-text -->
+          <!-- react-text: 2223 -->
+          <!-- /react-text --></a><a href="https://paytm.com/buy-insurance/two-wheeler-insurance">Two Wheeler
+          Insurance</a><a href="https://paytm.com/buy-insurance/car-insurance">Private Car Insurance</a><a
+          href="https://paytm.com/buy-insurance/term-life-insurance">Term Life Insurance</a><a
+          href="https://paytm.com/buy-insurance/health-insurance">Health Insurance</a></div>
+      <div class="_3J5h"><a href="">
+          <!-- react-text: 2230 -->
+          <!-- /react-text -->
+          <!-- react-text: 2231 -->
+          <!-- /react-text --></a><a href="https://paytm.com/education">Fee Payment</a><a
+          href="https://paytm.com/google-play-gift-card-recharge">Google Play Recharge</a><a
+          href="https://paytm.com/fastag">Fastag</a><a href="https://paytm.com/offer/qr-code-scanner">QR Code
+          Scanner</a><a href="https://paytm.com/train-tickets">Train Tickets</a></div>
+    </div>
+  </div>
+</div>
